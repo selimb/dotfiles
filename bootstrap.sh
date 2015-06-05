@@ -136,8 +136,8 @@ setup_gitconfig () {
   user ' - What is your github author email?'
   read -e git_authoremail
 
-  git config --global user.name $"git_authorname"
-  git config --global user.email $"git_authoremail"
+  git config --global user.name "$git_authorname"
+  git config --global user.email "$git_authoremail"
 
   success 'gitconfig'
 }
