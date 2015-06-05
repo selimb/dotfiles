@@ -1,0 +1,60 @@
+{
+    "windows": {
+        "cmd": [
+            "texify",
+            "-b",
+            "-p",
+            "--tex-option=\"--synctex=1\"",
+            "{file}"
+        ],
+        "cmd_qb": {
+            "biber": [
+                "biber",
+                "{filebase}"
+            ],
+            "bibtex": [
+                "bibtex",
+                "{filebase}"
+            ],
+            "latexmk": [
+                "latexmk",
+                "-f",
+                "-quiet",
+                "-pdf",
+                "-synctex={synctex}",
+                "-jobname={pdfname}",
+                "-outdir={outdir}",
+                "{file}"
+            ],
+            "lualatex": [
+                "lualatex",
+                "-interaction=nonstopmode",
+                "-interaction=batchmode",
+                "-jobname={pdfname}",
+                "-synctex={synctex}",
+                "-output-directory={outdir}",
+                "{file}"
+            ],
+            "pdflatex": [
+                "pdflatex",
+                "-interaction=nonstopmode",
+                "-interaction=batchmode",
+                "-jobname={pdfname}",
+                "-synctex={synctex}",
+                "-output-directory={outdir}",
+                "{file}"
+            ],
+            "xelatex": [
+                "xelatex",
+                "-interaction=nonstopmode",
+                "-interaction=batchmode",
+                "-jobname={pdfname}",
+                "-synctex={synctex}",
+                "-output-directory={outdir}",
+                "{file}"
+            ]
+        },
+        // "file_regex": "^(?:W|E|B):\\s(.*):([0-9]+)",
+        "path": "C:\\MikTeX\\miktex\\bin;$PATH"
+    }
+}

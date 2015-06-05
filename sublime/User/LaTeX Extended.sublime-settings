@@ -1,0 +1,8 @@
+{
+    "spell_check": true,
+    "dictionary": "Packages/Language - English/en_US.dic",
+    "rulers": [80],
+    "wrap_lines": true,
+    "wrap_width":80,
+    // "wrap_width": 100,
+}

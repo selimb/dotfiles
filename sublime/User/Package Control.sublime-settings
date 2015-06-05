@@ -1,0 +1,26 @@
+{
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"AlignTab",
+		"Anaconda",
+		"AutoHotkey",
+		"BracketHighlighter",
+		"Delete Lines",
+		"GitGutter",
+		"Gitignore",
+		"Indent XML",
+		"LaTeX-Plus",
+		"Markdown Preview",
+		"MarkdownEditing",
+		"Monokai Gray",
+		"Open-Include",
+		"Package Control",
+		"PackageResourceViewer",
+		"SideBarEnhancements",
+		"Terminal",
+		"Theme - Brogrammer"
+	]
+}
