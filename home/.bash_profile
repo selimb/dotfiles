@@ -4,11 +4,17 @@ export PATH="$HOME/bin:$PATH";
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
-for file in ~/.{path,bash_prompt,aliases,functions,extra}; do
+for file in ~/.{path,bash_prompt,aliases,extra}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
 
+for file in ~/bin/*funcs.sh; do
+    [ -r "$file" ] && [ -f "$file" ] && source "$file";
+done;
+unset file;
+
+# for file in ~/bin/{bash_funcs.sh, python_funcs.sh}
 # Case-insensitive globbing (used in pathname expansion)
 shopt -s nocaseglob;
 

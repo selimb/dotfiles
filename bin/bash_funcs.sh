@@ -42,21 +42,3 @@ function json() {
 }
 
 
-# Activate venv and re-source PS1 from bash_prompt to get colored venv name.
-function vact() {
-	source bin/activate
-	source ~/.bash_prompt
-}
-
-# Pyvenv-3.4 is currently broken in Ubuntu 14.04. This script needs to be run to create new
-# environments with pyvenv
-function pyv() {
-	if ! (pyvenv-3.4 --without-pip $1); then
-		return
-	fi
-	source $1/bin/activate
-	curl https://bootstrap.pypa.io/get-pip.py | python
-	deactivate
-	cd $1
-	vact
-}
