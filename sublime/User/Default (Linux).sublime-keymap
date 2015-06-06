@@ -16,5 +16,6 @@
   { "keys": ["ctrl+shift+t"], "command": "reopen_last_file" },
   { "keys": ["ctrl+alt+u"], "command": "title_case"},
   { "keys": ["ctrl+shift+alt+i"], "command": "insert_path", "args": {"type": "relative"} },
-  { "keys": ["ctrl+shift+o"], "command": "prompt_open_project_or_workspace"}
+  { "keys": ["ctrl+shift+o"], "command": "prompt_open_project_or_workspace"},
+  { "keys": ["ctrl+alt+n"], "command": "side_bar_new_file2"}
 ]
