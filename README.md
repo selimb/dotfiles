@@ -21,6 +21,10 @@ To setup dotfiles:
 ```bash
 source bootstrap.sh
 ```
+If your gitconfig user name and email are already setup, you can skip the git setup step by running:
+```bash
+source bootstrap.sh --no-git
+```
 To setup packages:
 ```bash
 source install.sh

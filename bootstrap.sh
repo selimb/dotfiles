@@ -128,6 +128,17 @@ install_sublime () {
   done
 }
 
+install_bin() {
+  info 'installing bin'
+  echo ''
+
+  local overwrite_all=false backup_all=false skip_all=false
+
+  for location in bin/*; do
+    file="${location##*/}"
+    link_file "$dotfiles/$location" "$HOME/bin/$file"
+  done
+}
 setup_gitconfig () {
   info 'setup gitconfig'
 
@@ -142,6 +153,14 @@ setup_gitconfig () {
   success 'gitconfig'
 }
 
+# add_functions () {
+#   for
+# }
+
 install_home_dotfiles
+install_bin
 install_sublime
-setup_gitconfig
+if [ "$1" != "--no-git" ]
+then
+  setup_gitconfig
+fi
