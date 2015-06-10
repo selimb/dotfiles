@@ -1,7 +1,7 @@
 # Selim’s dotfiles
 
 ## First Steps
-* Install sublime text 3
+* Install [Sublime Text 3](http://www.sublimetext.com/3)
 * Install [Package Manager](https://packagecontrol.io/installation) for ST3
 ```bash
 sudo apt-get install git
