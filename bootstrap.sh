@@ -132,6 +132,8 @@ install_bin() {
   info 'installing bin'
   echo ''
 
+  mkdir "$HOME/bin"
+
   local overwrite_all=false backup_all=false skip_all=false
 
   for location in bin/*; do
@@ -139,6 +141,7 @@ install_bin() {
     link_file "$dotfiles/$location" "$HOME/bin/$file"
   done
 }
+
 setup_gitconfig () {
   info 'setup gitconfig'
 
@@ -152,10 +155,6 @@ setup_gitconfig () {
 
   success 'gitconfig'
 }
-
-# add_functions () {
-#   for
-# }
 
 install_home_dotfiles
 install_bin
