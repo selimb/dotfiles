@@ -1,3 +1,14 @@
 {
-    "pep8_ignore":["E266"]
+    "pep8_ignore":["E266"],
+
+    /*
+        If complete_parameters is true, anaconda will add function and class
+        parameters to its completions.
+
+        If complete_all_parameters is true, it will add all the possible
+        parameters, if it's false, it will add only required parameters
+    */
+    "complete_parameters": false,
+    "complete_all_parameters": false,
+
 }
