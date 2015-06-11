@@ -3,6 +3,7 @@
   { "keys": ["ctrl+tab"], "command": "next_view" },
   { "keys": ["ctrl+shift+tab"], "command": "prev_view" },
   { "keys": ["ctrl+shift+l"], "command":"delete_lines"},
+  // Tab through certain characters
   { "keys": ["tab"], "command": "move", "args": {"by": "characters", "forward": true}, "context":
     [
         { "key": "selection_empty", "operator": "equal", "operand": true },
@@ -12,10 +13,28 @@
         { "key": "has_next_field", "operator": "equal", "operand": false }
     ]
   },
-    { "keys": ["ctrl+alt+t"], "command": "open_terminal" },
+    { "keys": ["ctrl+alt+shift+t"], "command": "open_terminal" },
+  // Re-open last file
   { "keys": ["ctrl+shift+t"], "command": "reopen_last_file" },
+  // Camel case
   { "keys": ["ctrl+alt+u"], "command": "title_case"},
+  // Can't remember...
   { "keys": ["ctrl+shift+alt+i"], "command": "insert_path", "args": {"type": "relative"} },
+  // Open project.
   { "keys": ["ctrl+shift+o"], "command": "prompt_open_project_or_workspace"},
-  { "keys": ["ctrl+alt+n"], "command": "side_bar_new_file2"}
+  // Create new file relative to current file.
+  { "keys": ["ctrl+alt+n"], "command": "side_bar_new_file2"},
+
+  /*
+  -------------------------
+  PYTHON-SPECIFIC
+  --------------------------
+  */
+  { "keys": ["shift+enter"], "command": "run_macro_file", "args": {"file": "Packages/Python/New-Doc-Param.sublime-macro"},
+  "context":
+    [
+      {"key": "selector", "operator": "equal", "operand": "source.python string.quoted.double.block.python"},
+      {"key": "selection_empty", "operator": "equal", "operand": true, "match_all": true}
+    ]
+  }
 ]

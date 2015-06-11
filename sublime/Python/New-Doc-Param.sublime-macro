@@ -1,0 +1,20 @@
+[
+	{
+		"args":
+		{
+			"characters": "\n"
+		},
+		"command": "insert"
+	},
+	{
+		"args": null,
+		"command": "unindent"
+	},
+	{
+		"args":
+		{
+			"name": "Packages/Python/New-Doc-Param.sublime-snippet"
+		},
+		"command": "insert_snippet"
+	},
+]
