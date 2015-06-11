@@ -1,5 +1,5 @@
 {
-    "pep8_ignore":["E266"],
+    "pep8_ignore":["E266", "E309"],
 
     /*
         If complete_parameters is true, anaconda will add function and class
