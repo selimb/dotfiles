@@ -1,5 +1,6 @@
 dotfiles=$(pwd)
-sublime_dir=$HOME/.config/sublime-text-3/Packages
+sublime_dir=$HOME/.config/sublime-text-3
+sublime_pkg=$sublime_dir/Packages
 
 # From https://github.com/holman/dotfiles/blob/master/script/bootstrap
 
@@ -18,7 +19,6 @@ success () {
 fail () {
   printf "\r\033[2K  [\033[0;31mFAIL\033[0m] $1\n"
   echo ''
-  exit
 }
 
 link_file () {
@@ -113,24 +113,11 @@ install_home_dotfiles () {
   done
 }
 
-install_sublime () {
-  info 'installing sublime'
-  echo ''
-
-  local overwrite_all=false backup_all=false skip_all=false
-
-  for location in sublime/*/ ; do
-  	base=${location%/}
-	  base=$(basename $base)
-	  src="$dotfiles/$location"
-	  dest="$sublime_dir/$base"
-	  link_file "$src" "$dest"
-  done
-}
-
 install_bin() {
   info 'installing bin'
   echo ''
+
+  mkdir "$HOME/bin"
 
   local overwrite_all=false backup_all=false skip_all=false
 
@@ -139,6 +126,40 @@ install_bin() {
     link_file "$dotfiles/$location" "$HOME/bin/$file"
   done
 }
+
+get_package_control () {
+    info 'Installing Package Control for Sublime Text'
+    wget https://packagecontrol.io/Package%20Control.sublime-package
+    mv "Package Control.sublime-package" "$sublime_dir/Installed Packages"
+}
+install_sublime () {
+  info 'installing sublime'
+  echo ''
+
+  if [ ! -d $sublime_pkg ]
+  then
+    fail 'Sublime Text could not be found.'
+    return
+  fi
+
+  if [ ! -f "$sublime_dir/Installed Packages/Package Control.sublime-package" ]
+  then
+    get_package_control
+  fi
+
+  local overwrite_all=false backup_all=false skip_all=false
+
+
+  for location in sublime/*/ ; do
+    base=${location%/}
+      base=$(basename $base)
+      src="$dotfiles/$location"
+      dest="$sublime_pkg/$base"
+      link_file "$src" "$dest"
+  done
+}
+
+
 setup_gitconfig () {
   info 'setup gitconfig'
 
@@ -152,10 +173,6 @@ setup_gitconfig () {
 
   success 'gitconfig'
 }
-
-# add_functions () {
-#   for
-# }
 
 install_home_dotfiles
 install_bin

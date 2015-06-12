@@ -1,14 +1,13 @@
 # Selim’s dotfiles
 
 ## First Steps
-Install google chrome
-Install sublime text 3
-Install [Package Manager](https://packagecontrol.io/installation) for ST3
+* Install [Sublime Text 3](http://www.sublimetext.com/3)
+* Install [Package Manager](https://packagecontrol.io/installation) for ST3
 ```bash
 sudo apt-get install git
 ```
 [Generate SSH keys](https://help.github.com/articles/generating-ssh-keys/#platform-linux)
-Now you're ready to clone this. 
+Now you're ready to clone this.
 
 ## Installation
 Start with
@@ -30,11 +29,18 @@ To setup packages:
 source install.sh
 ```
 
-### Reminder 
-Use `pyv` to use `pyvenv-3.4` on Ubuntu 14.04
+## Pyvenv Wrapper
+
+The functions in `bin/python_funcs.sh` provide a simple wrapper for `pyvenv-3.4`. You can use:
+```bash
+pyv <existing-project>   #  Make virtual environment for this project
+work <existing-project>  #  Work on virtual environment for this project
+deactivate
+```
+Environments are created in `~/.venvs/` so that the project directory is not cluttered.
 
 ## Extra
-#### Scientific Python 
+#### Scientific Python
 ```sudo apt-get install python-numpy python-scipy python-matplotlib ipython ipython-notebook python-pandas python-sympy python-nose```
 
 ## Inspired from
