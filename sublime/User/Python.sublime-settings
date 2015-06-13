@@ -1,9 +1,7 @@
 {
     "line_padding_bottom": 1,
     "line_padding_top": 1,
-    "detect_indentation": false,
     "find_selected_text": true,
-    // "shift_tab_unindent": true,
     "show_panel_on_build": false,
     "caret_style": "solid",
     "font_options":
@@ -18,22 +16,21 @@
     ],
     "shift_tab_unindent": true,
     "tab_size": 4,
-    // "translate_tabs_to_spaces": true,
     "trim_trailing_white_space_on_save": true,
+    "word_wrap": false,
     "wrap_width": 80,
-    "word_wrap": true,
     "sublimelinter": false,
     "auto_complete_commit_on_tab": false,
     "auto_match_enabled": true,
     "bold_folder_labels": true,
-    // "detect_indentation": true,
+    "detect_indentation": true,
+    "smart_indent": true,
     "draw_indent_guides": true,
     "ensure_newline_at_eof_on_save": true,
-    // "smart_indent": true,
     "auto_indent": true,
     // If translate_tabs_to_spaces is true, use_tab_stops will make tab and
     // backspace insert/delete up to the next tabstop
-    "use_tab_stops": false,
+    "use_tab_stops": true,
     "folder_exclude_patterns":
     [
         ".svn",
