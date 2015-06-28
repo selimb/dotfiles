@@ -1,4 +1,0 @@
-export VIRTUALENVWRAPPER_VIRTUALENV="pyvenv-3.4"
-export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/Projects
-source /usr/bin/virtualenvwrapper.sh
