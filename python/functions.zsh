@@ -3,7 +3,7 @@ VENV_DIR="$HOME/.venvs"
 # Activate venv and re-source PS1 from bash_prompt to get colored venv name.
 function work() {
     source "$VENV_DIR/$1/bin/activate"
-    source "$HOME/.bash_prompt"
+    # source "$HOME/.bash_prompt"
 }
 
 #################      OBSOLETE       #####################

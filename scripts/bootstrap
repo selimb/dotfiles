@@ -1,6 +1,5 @@
-dotfiles=$(pwd)
-sublime_dir=$HOME/.config/sublime-text-3
-sublime_pkg=$sublime_dir/Packages
+#!/usr/bin/env bash
+DOTFILES_ROOT=$(pwd)
 
 # From https://github.com/holman/dotfiles/blob/master/script/bootstrap
 
@@ -96,34 +95,15 @@ link_file () {
   fi
 }
 
-
-# Mix between:
-# https://github.com/paulmillr/dotfiles
-# and
-# https://github.com/paulmillr/dotfiles
-install_home_dotfiles () {
+install_dotfiles () {
   info 'installing dotfiles'
 
   local overwrite_all=false backup_all=false skip_all=false
 
-  for location in $(find home -name '.*'); do
-	  file="${location##*/}"
-	  file="${file%.sh}"
-	  link_file "$dotfiles/$location" "$HOME/$file"
-  done
-}
-
-install_bin() {
-  info 'installing bin'
-  echo ''
-
-  mkdir "$HOME/bin"
-
-  local overwrite_all=false backup_all=false skip_all=false
-
-  for location in bin/*; do
-    file="${location##*/}"
-    link_file "$dotfiles/$location" "$HOME/bin/$file"
+  for src in $(find -H "$DOTFILES_ROOT" -maxdepth 2 -name '*.symlink')
+  do
+    dst="$HOME/.$(basename "${src%.*}")"
+    link_file "$src" "$dst"
   done
 }
 
@@ -132,28 +112,34 @@ get_package_control () {
     wget https://packagecontrol.io/Package%20Control.sublime-package
     mv "Package Control.sublime-package" "$sublime_dir/Installed Packages"
 }
+
 install_sublime () {
   info 'installing sublime'
   echo ''
 
+  sublime_dir=$HOME/.config/sublime-text-3
+  sublime_pkg=$sublime_dir/Packages
+
   if [ ! -d $sublime_pkg ]
   then
-    fail 'Sublime Text could not be found.'
-    return
+    sudo add-apt-repository ppa:webupd8team/sublime-text-3 -y > /dev/null 2>&1
+    sudo apt-get update > /dev/null 2>&1
+    sudo apt-get install sublime-text-installer -y > /dev/null 2>&1
+    success Installed Sublime Text 3
   fi
 
   if [ ! -f "$sublime_dir/Installed Packages/Package Control.sublime-package" ]
   then
     get_package_control
+    success Installed Package Control for ST3
   fi
 
   local overwrite_all=false backup_all=false skip_all=false
 
-
   for location in sublime/*/ ; do
     base=${location%/}
       base=$(basename $base)
-      src="$dotfiles/$location"
+      src="$DOTFILES_ROOT/$location"
       dest="$sublime_pkg/$base"
       link_file "$src" "$dest"
   done
@@ -161,23 +147,26 @@ install_sublime () {
 
 
 setup_gitconfig () {
-  info 'setup gitconfig'
+  if ! [ -f git/gitconfig.symlink ]
+  then
+    info 'setup gitconfig'
 
-  user ' - What is your github author name?'
-  read -e git_authorname
-  user ' - What is your github author email?'
-  read -e git_authoremail
+    git_credential='cache'
 
-  git config --global user.name "$git_authorname"
-  git config --global user.email "$git_authoremail"
+    user ' - What is your github author name?'
+    read -e git_authorname
+    user ' - What is your github author email?'
+    read -e git_authoremail
 
-  success 'gitconfig'
+    sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" git/gitconfig.symlink.example > git/gitconfig.symlink
+
+    success 'gitconfig'
+  fi
 }
 
-install_home_dotfiles
-install_bin
+install_dotfiles
 install_sublime
-if [ "$1" != "--no-git" ]
-then
-  setup_gitconfig
-fi
+setup_gitconfig
+
+echo ''
+echo '  All installed!'
