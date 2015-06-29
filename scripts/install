@@ -13,18 +13,15 @@ success () {
   printf "\r\033[2K  [ \033[00;32mOK\033[0m ] $1\n"
 }
 
-prompt () {
-  read -n 1 action
-  if 
-}
-
 # find the installers and run them iteratively
 for installer in $(find . -name install.sh)
 do
   user "Do you want to install $installer? [y/n]"
   read -n 1 action
+  echo ''
   if [[ "$action" = y ]]; then
     sh -c "${installer}"
+    success "Installed $installer"
   fi
 done
 
