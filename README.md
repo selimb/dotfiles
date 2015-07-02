@@ -3,7 +3,7 @@
 ## First Steps
 ```bash
 sudo apt-get install zsh
-chsh -s $(which zsh)
+chsh -s $(which zsh)  # Restart computer for this to take effect.
 sudo apt-get install git
 ```
 [Generate SSH keys](https://help.github.com/articles/generating-ssh-keys/#platform-linux)
@@ -22,11 +22,11 @@ scripts/bootstrap
 ```
 Note that this will also install Sublime Text 3 along with the Package Manager -- and the User Packages of course.
 
-To setup packages:
+To setup packages: 
 ```bash
 scripts/install
 ```
-This may take a while. 
+You will be prompted to confirm which ones you want to install unless you pass the `-y` flag. This may take a while. 
 
 ## Pyvenv Wrapper
 
