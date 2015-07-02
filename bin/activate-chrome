@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+chrome="Google Chrome"
+activate="wmctrl -a $chrome"
+
+# If arguments are specified, launch google search on it.
+if [[ -n "$1" ]]; then
+    words="$@"
+    search=""
+    for word in $words; do
+        search="$search%20$word"
+    done
+    xdg-open "https://www.google.ca/search?q=$search"
+elif [[ -z $(wmctrl -l | grep "$chrome") ]]; then  #Check if Chrome is not running
+    google-chrome
+fi
+$activate
+exit 0
