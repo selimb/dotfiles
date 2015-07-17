@@ -60,3 +60,5 @@
 [user]
 	name = Selim Belhaouane
 	email = selim.belhaouane@gmail.com
+[push]
+	default = simple
