@@ -9,6 +9,7 @@
 		"AutoHotkey",
 		"BracketHighlighter",
 		"Delete Lines",
+		"Emmet",
 		"GitGutter",
 		"GitGutter-Edge",
 		"Gitignore",
@@ -22,6 +23,7 @@
 		"PackageResourceViewer",
 		"SideBarEnhancements",
 		"Terminal",
-		"Theme - Brogrammer"
+		"Theme - Brogrammer",
+		"View In Browser"
 	]
 }
