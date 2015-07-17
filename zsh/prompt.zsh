@@ -183,8 +183,8 @@ function virtualenv_info ()
   [ $VIRTUAL_ENV ] && echo '['`basename $VIRTUAL_ENV`'] '
 }
 export VIRTUAL_ENV_DISABLE_PROMPT=1
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[blue]%}("
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{$fg[blue]%})%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[yellow]%}("
+ZSH_THEME_GIT_PROMPT_SUFFIX="%{$fg[yellow]%})%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%}✗"
 # ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[yellow]%} [!]"
 ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%}✓"
@@ -193,5 +193,5 @@ ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%}✓"
 # PROMPT='
 # %{$fg[blue]%}%n%{$reset_color%} in %{$fg[green]%}${PWD/#$HOME/~}%b%{$reset_color%} ›'
 PROMPT='
-%{$fg[green]%}${PWD/#$HOME/~}%b%{$reset_color%} % '
-RPROMPT='$(git_prompt_info) %{$fg[yellow]%}$(virtualenv_info)%{$reset_color%}'
+%{$fg[yellow]%}%n%{$reset_color%} in %{$fg[green]%}${PWD/#$HOME/~}%b%{$reset_color%} % '
+RPROMPT='$(git_prompt_info) %{$fg[green]%}$(virtualenv_info)%{$reset_color%}'
