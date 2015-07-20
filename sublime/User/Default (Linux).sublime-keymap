@@ -24,7 +24,10 @@
   { "keys": ["ctrl+shift+o"], "command": "prompt_open_project_or_workspace"},
   // Create new file relative to current file.
   { "keys": ["ctrl+alt+n"], "command": "side_bar_new_file2"},
-
+  // Move file to new group.
+  { "keys": ["super+right"], "command": "new_pane"},
+  // Back to one group.
+  { "keys": ["super+left"], "command": "set_layout", "args": {"cells": "[[0, 0, 1, 1]]", "cols": "[0.0, 1.0]", "rows": "[0.0, 1.0]"}},
   /*
   -------------------------
   PYTHON-SPECIFIC
