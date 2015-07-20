@@ -13,7 +13,7 @@ Now you're ready to clone this.
 Start with
 ```bash
 cd ~
-git clone https://github.com/Kreger51/dotfiles.git
+git clone https://github.com/beselim/dotfiles.git
 cd dotfiles
 ```
 To setup dotfiles:
