@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+name="$1"
+loc="$SUBL_HOME/$name.sublime-project"
+if [[ -z $name ]]; then
+    echo Please provide name for project.
+    exit
+elif [[ -e "$loc" ]]; then
+    echo Project already exists.
+    exit
+fi
+path="$PWD"
+project="{
+    \"folders\":
+    [
+        {
+            \"path\": \"$path\"
+        }
+    ]
+}
+"
+echo "$project" > $loc
+subl $loc
