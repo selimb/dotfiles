@@ -189,9 +189,11 @@ ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%}✗"
 # ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[yellow]%} [!]"
 ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%}✓"
 
-
+local return_code='%{$fg[red]%}%(?,,[%?])'
+# local return_code="%(?..%{$fg[red]%}%? %{$reset_color%})"
 # PROMPT='
 # %{$fg[blue]%}%n%{$reset_color%} in %{$fg[green]%}${PWD/#$HOME/~}%b%{$reset_color%} ›'
 PROMPT='
-%{$fg[yellow]%}%n%{$reset_color%} in %{$fg[green]%}${PWD/#$HOME/~}%b%{$reset_color%} % '
-RPROMPT='$(git_prompt_info) %{$fg[green]%}$(virtualenv_info)%{$reset_color%}'
+%{$fg[green]%}${PWD/#$HOME/~}%b%{$reset_color%} % '
+RPROMPT='%{$fg[red]%}%(?,,[%?]) $(git_prompt_info) %{$fg[green]%}$(virtualenv_info)%{$reset_color%}'
+# RPS1='%{$fg[blue]%}%~%{$reset_color%} ${return_code} '
