@@ -7,6 +7,7 @@
 		"AlignTab",
 		"Anaconda",
 		"AutoHotkey",
+		"Bracketeer",
 		"BracketHighlighter",
 		"Delete Lines",
 		"Emmet",
@@ -14,6 +15,7 @@
 		"GitGutter-Edge",
 		"Gitignore",
 		"Indent XML",
+		"jinja2-tmbundle",
 		"LaTeX-Plus",
 		"Markdown Preview",
 		"MarkdownEditing",
@@ -21,9 +23,15 @@
 		"Open-Include",
 		"Package Control",
 		"PackageResourceViewer",
+		"Python Improved",
 		"SideBarEnhancements",
 		"Terminal",
 		"Theme - Brogrammer",
 		"View In Browser"
+	],
+	"repositories":
+	[
+		"https://github.com/kudago/jinja2-tmbundle",
+		"https://github.com/kudago/jinja2-tmbundle"
 	]
 }
