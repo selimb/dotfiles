@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# If arguments are specified, launch google search on it.
+if [[ -n "$1" ]]; then
+    words="$@"
+    search=""
+    for word in $words; do
+        search="$search%20$word"
+    done
+    activate-chrome "https://www.google.ca/search?q=$search"
+else
+    activate-chrome
+fi
+exit 0
