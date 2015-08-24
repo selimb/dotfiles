@@ -27,17 +27,43 @@
   // Move file to new group.
   { "keys": ["super+right"], "command": "new_pane"},
   // Back to one group.
-  { "keys": ["super+left"], "command": "set_layout", "args": {"cells": "[[0, 0, 1, 1]]", "cols": "[0.0, 1.0]", "rows": "[0.0, 1.0]"}},
+  { "keys": ["super+left"], "command": "set_layout", "args": {"cells": "[[0, 0, 1, 1]]", "cols": "[0.0, 1.0]", "rows": "[0.0, 1.0]"} },
+  // Show console
+  { "keys": ["alt+`"], "command": "show_panel", "args": {"panel":"console", "toggle":true} },
+  // Column selection
+  { "keys": ["alt+up"], "command": "select_lines", "args": {"forward": false} },
+  { "keys": ["alt+down"], "command": "select_lines", "args": {"forward": true} },
   /*
-  -------------------------
+  -----------------------------------------------------------------------------
   PYTHON-SPECIFIC
-  --------------------------
+  -----------------------------------------------------------------------------
   */
   { "keys": ["shift+enter"], "command": "run_macro_file", "args": {"file": "Packages/Python/New-Doc-Param.sublime-macro"},
   "context":
     [
       {"key": "selector", "operator": "equal", "operand": "source.python string.quoted.double.block.python"},
       {"key": "selection_empty", "operator": "equal", "operand": true, "match_all": true}
+    ]
+  },
+  { "keys": ["shift+enter"], "command": "insert_snippet", "args": {"contents": "'$1': $2"}, "context":
+    [
+      { "key": "selector", "operator": "equal", "operand": "meta.structure.dictionary.python"},
+      {"key": "selection_empty", "operator": "equal", "operand": true, "match_all": true}
+    ]
+  },
+  /*
+  -----------------------------------------------------------------------------
+  JINJA
+  -----------------------------------------------------------------------------
+  */
+  { "keys": ["{"], "command": "insert", "args": {"characters": "{"}, "context":
+    [
+      {"key": "selector", "operator": "equal", "operand": "text.html.jinja2"}
+    ]
+  },
+  { "keys": ["tab"], "command": "expand_abbreviation_by_tab", "context" :
+    [
+      { "key": "selector", "operator": "equal", "operand": "text.html.jinja"}
     ]
   }
 ]
