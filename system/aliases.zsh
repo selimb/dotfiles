@@ -40,3 +40,5 @@ alias sudo='sudo '
 # window, add the -n flag.
 alias subl='subl -a'
 
+# Make temporary directory and cd into it.
+alias tmp='mkdir tmp && cd tmp'
