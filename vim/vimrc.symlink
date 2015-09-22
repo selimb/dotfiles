@@ -61,15 +61,11 @@ endif
 " Don't wake up system with blinking cursor:
 " http://www.linuxpowertop.org/known.php
 let &guicursor = &guicursor . ",a:blinkon0"
-" Ruler at 80 columns and 8 columns
-set colorcolumn=73
 " Ensure correct syntax highlighting and auto-indentation for Fortran
 " free-form
 " " source code.
 let fortran_do_enddo=1
 filetype plugin indent on
-nmap <S-Enter> O<Esc>
-nmap <CR> o<Esc>
 " Set tabstops to two spaces and ensure tab characters are expanded into
 " " spaces.
 set smarttab
@@ -78,7 +74,9 @@ set smartindent
 set autoindent
 set tabstop=4
 set shiftwidth=4
+" Go to FORTRAN continuation line character
 let @c='0lllll'
+" Copy line below.
 let @n='VyP'
  
  
