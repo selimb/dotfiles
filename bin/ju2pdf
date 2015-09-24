@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+# Convert an .ipynb to pdf through html with wkhtml2pdf
+input="$1"
+filename="${input%.*}"
+jupyter nbconvert --to html $input
+wkhtmltopdf --image-quality 300 $filename.html $filename.pdf
+rm $filename.html

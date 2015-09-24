@@ -181,8 +181,10 @@ unset -f git_compare_version
 function virtualenv_info ()
 {
   [ $VIRTUAL_ENV ] && echo '['`basename $VIRTUAL_ENV`'] '
+  [ $CONDA_DEFAULT_ENV ] && echo '['$CONDA_DEFAULT_ENV'] '
 }
 export VIRTUAL_ENV_DISABLE_PROMPT=1
+
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[yellow]%}("
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$fg[yellow]%})%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%}✗"
