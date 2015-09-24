@@ -46,4 +46,6 @@ alias subl='subl -a'
 
 # Make temporary directory and cd into it.
 alias tmp='mkdir tmp && cd tmp'
+# Untar
 
+alias untar="tar xvzf"
