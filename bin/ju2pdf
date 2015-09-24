@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
-
 # Convert an .ipynb to pdf through html with wkhtml2pdf
+
+# Exit if command fails.
+set -e
+
 input="$1"
 filename="${input%.*}"
 jupyter nbconvert --to html $input
