@@ -39,3 +39,6 @@ alias sudo='sudo '
 # If you ever do want to open a folder/file in a new
 # window, add the -n flag.
 alias subl='subl -a'
+
+# Untar
+alias untar="tar xvzf"
