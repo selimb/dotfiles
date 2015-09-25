@@ -16,6 +16,7 @@ Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
+Plugin 'terryma/vim-multiple-cursors'
 
 " All of your plugins must be added before the following line.
 call vundle#end()            " required
@@ -98,10 +99,10 @@ set smartindent
 set autoindent
 set tabstop=4
 set shiftwidth=4
-" Go to FORTRAN continuation line character
-let @c='0lllll'
+" Insert continuation line character
+let @n='0lllllr&'
 " Copy line below.
-let @n='VyP'
+let @c='0rC'
  
  
  
