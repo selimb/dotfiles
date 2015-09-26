@@ -104,6 +104,11 @@ let @n='0lllllr&'
 " Copy line below.
 let @c='0rC'
  
- 
- 
- 
+" Delete trailing whitespace on save
+fun! <SID>StripTrailingWhitespaces()
+    let l = line(".")
+    let c = col(".")
+    %s/\s\+$//e
+    call cursor(l, c)
+endfun
+autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
