@@ -39,3 +39,6 @@ do
 done
 
 unset config_files
+
+# ls_colors for solarized
+eval `dircolors $ZSH/zsh/dircolors.ansi-dark`
