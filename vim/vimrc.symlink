@@ -103,6 +103,7 @@ set shiftwidth=4
 let @n='0lllllr&'
 " Copy line below.
 let @c='0rC'
+<<<<<<< HEAD
 " Search for visually selected text
 vnoremap // y/<C-R>"<CR>
 " Fix delay when pressing Shift+0 after Escape
@@ -124,3 +125,14 @@ nnoremap <Down> <C-w>j
 set laststatus=2
 " Show current file in status line (relative)
 set statusline+=%F
+=======
+ 
+" Delete trailing whitespace on save
+fun! <SID>StripTrailingWhitespaces()
+    let l = line(".")
+    let c = col(".")
+    %s/\s\+$//e
+    call cursor(l, c)
+endfun
+autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+>>>>>>> origin/master
