@@ -1,0 +1,11 @@
+# Highlight current pane with red border
+set-option -g pane-active-border-fg red
+# Set tmux to use vi keys
+# setw -g mode-keys vi
+# unbind [
+# bind Escape copy-mode
+# unbind p
+# bind p paste-buffer
+# bind-key -t vi-copy 'v' begin-selection
+# bind-key -t vi-copy 'y' copy-selection
+
