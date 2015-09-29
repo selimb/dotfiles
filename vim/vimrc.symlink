@@ -103,7 +103,24 @@ set shiftwidth=4
 let @n='0lllllr&'
 " Copy line below.
 let @c='0rC'
- 
- 
- 
- 
+" Search for visually selected text
+vnoremap // y/<C-R>"<CR>
+" Fix delay when pressing Shift+0 after Escape
+" See https://github.com/vim/vim/issues/24
+:set timeout timeoutlen=5000 ttimeoutlen=100
+
+" Move function argument to the right
+" Note: the arguments need to be whitespace separated
+let @f='df f pT '
+
+" Remap arrow keys to move between vim windows
+" mouhahaha
+nnoremap <Right> <C-w>l
+nnoremap <Left> <C-w>h
+nnoremap <Up> <C-w>k
+nnoremap <Down> <C-w>j
+
+" Show statusline
+set laststatus=2
+" Show current file in status line (relative)
+set statusline+=%F
