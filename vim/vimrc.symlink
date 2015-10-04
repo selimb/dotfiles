@@ -1,7 +1,7 @@
-" ---------------------------------------------------------
+" =========================================================
 "  Vundle configuration
-" ---------------------------------------------------------
-set nocompatible	" Use Vim defaults (much better!)
+" =========================================================
+set nocompatible    " Required
 filetype off        " Required
 
 " Set the runtime path to include Vundle and initialize
@@ -11,121 +11,46 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-" Plugin: snipmate
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
 Plugin 'terryma/vim-multiple-cursors'
+" Plugin 'reedes/vim-colors-pencil'
+" Plugin 'altercation/vim-colors-solarized'
 
 " All of your plugins must be added before the following line.
 call vundle#end()            " required
 filetype plugin indent on    " required
-" ---------------------------------------------------------
+" =========================================================
 
+" =========================================================
+" Colors
+" =========================================================
+syntax on
+set background=light
+" =========================================================
 
-if v:lang =~ "utf8$" || v:lang =~ "UTF-8$"
-   set fileencodings=ucs-bom,utf-8,latin1
-endif
-
-set bs=indent,eol,start		" allow backspacing over everything in insert mode
-set ai			" always set autoindenting on
-"set backup		" keep a backup file
-set viminfo='20,\"50	" read/write a .viminfo file, don't store more
-			" than 50 lines of registers
-set history=50		" keep 50 lines of command line history
-set ruler		" show the cursor position all the time
-set number
-
-" Only do this part when compiled with support for autocommands
-if has("autocmd")
-  augroup redhat
-  autocmd!
-  " In text files, always limit the width of text to 78 characters
-  autocmd BufRead *.txt set tw=78
-  " When editing a file, always jump to the last cursor position
-  autocmd BufReadPost *
-  \ if line("'\"") > 0 && line ("'\"") <= line("$") |
-  \   exe "normal! g'\"" |
-  \ endif
-  " don't write swapfile on most commonly used directories for NFS mounts or USB sticks
-  autocmd BufNewFile,BufReadPre /media/*,/mnt/* set directory=~/tmp,/var/tmp,/tmp
-  " start with spec file template
-  autocmd BufNewFile *.spec 0r /usr/share/vim/vimfiles/template.spec
-  augroup END
-endif
-
-if has("cscope") && filereadable("/usr/bin/cscope")
-   set csprg=/usr/bin/cscope
-   set csto=0
-   set cst
-   set nocsverb
-   " add any database in current directory
-   if filereadable("cscope.out")
-      cs add cscope.out
-   " else add database pointed to by environment
-   elseif $CSCOPE_DB != ""
-      cs add $CSCOPE_DB
-   endif
-   set csverb
-endif
-
-" Switch syntax highlighting on, when the terminal has colors
-" Also switch on highlighting the last used search pattern.
-if &t_Co > 2 || has("gui_running")
-  syntax on
-  set hlsearch
-endif
-
-if &term=="xterm"
-     set t_Co=8
-     set t_Sb=[4%dm
-     set t_Sf=[3%dm
-endif
-
-" Don't wake up system with blinking cursor:
-" http://www.linuxpowertop.org/known.php
-let &guicursor = &guicursor . ",a:blinkon0"
-" Ensure correct syntax highlighting and auto-indentation for Fortran
-" free-form
-" " source code.
-let fortran_do_enddo=1
-filetype plugin indent on
-" Set tabstops to two spaces and ensure tab characters are expanded into
-" " spaces.
-set smarttab
-set expandtab
-set smartindent
-set autoindent
-set tabstop=4
-set shiftwidth=4
-" Insert continuation line character
-let @n='0lllllr&'
-" Copy line below.
-let @c='0rC'
-
-" Search for visually selected text
-vnoremap // y/<C-R>"<CR>
-" Fix delay when pressing Shift+0 after Escape
+" =========================================================
+" Miscellaneous
+" =========================================================
+" UTF-8 encoding
+set enc=utf-8
+" Fix delay when pressing O after Escape
 " See https://github.com/vim/vim/issues/24
 :set timeout timeoutlen=5000 ttimeoutlen=100
+" =========================================================
 
-" Move function argument to the right
-" Note: the arguments need to be whitespace separated
-let @f='df f pT '
-
-" Remap arrow keys to move between vim windows
-" mouhahaha
-nnoremap <Right> <C-w>l
-nnoremap <Left> <C-w>h
-nnoremap <Up> <C-w>k
-nnoremap <Down> <C-w>j
-
-" Show statusline
-set laststatus=2
-" Show current file in status line (relative)
-set statusline+=%F
-
+" =========================================================
+" Spaces and Tabs
+" =========================================================
+set expandtab     " Convert tabs to spaces. Screw tabs.
+set shiftwidth=4  " Number of spaces per indent level.
+set softtabstop=4 " Number of visual spaces per tab.
+set smartindent   " Smart indent on new lines.
+set autoindent    " Use indentation from previous line.
+" Allow backspacing over everything in insert mode.
+set bs=indent,eol,start
 " Delete trailing whitespace on save
 fun! <SID>StripTrailingWhitespaces()
     let l = line(".")
@@ -134,3 +59,42 @@ fun! <SID>StripTrailingWhitespaces()
     call cursor(l, c)
 endfun
 autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+" =========================================================
+
+" =========================================================
+" UI Configuration
+" =========================================================
+set ruler         " Always show cursor position.
+set number        " Show line numbers.
+set cursorline    " Highlight line where cursor is.
+set wildmenu      " Show menu for autocomplete in ex mode.
+set laststatus=2  " Show statusline
+set statusline+=%F " Show current file in status line
+set hlsearch      " Highlight search.
+" =========================================================
+
+" =========================================================
+" Macros
+" =========================================================
+" Fortran-specific
+" ---------------------------------------------------------
+" Insert continuation line character
+let @n='0lllllr&'
+" Insert comment
+let @c='0rC'
+" =========================================================
+
+" =========================================================
+" Remaps
+" =========================================================
+" Remap arrow keys to move between vim windows
+" mouhahaha
+nnoremap <Right> <C-w>l
+nnoremap <Left> <C-w>h
+nnoremap <Up> <C-w>k
+nnoremap <Down> <C-w>j
+" Search for visually selected text
+vnoremap // y/<C-R>"<CR>
+" =========================================================
+
+let fortran_do_enddo=1
