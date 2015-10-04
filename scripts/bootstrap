@@ -165,7 +165,7 @@ setup_gitconfig () {
 }
 
 install_dotfiles
-install_sublime
+# install_sublime
 setup_gitconfig
 
 echo ''
