@@ -9,6 +9,7 @@ alias -- -="cd -"
 # Shortcuts
 alias dot='cd ~/dotfiles'
 alias p="cd ~/Projects"
+alias s="cd ~/School"
 
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
@@ -17,14 +18,14 @@ else # OS X `ls`
     colorflag="-G"
 fi
 
-# Always group by directories first. 
+# Always group by directories first.
 opt="--group-directories-first"
 
 # List all files colorized in long format
 alias l="ls -lF ${colorflag} ${opt}"
 
 # List files including dot files
-alias la="ls -a ${colorflag} ${opt}" 
+alias la="ls -a ${colorflag} ${opt}"
 
 # List all files colorized in long format, including dot files
 alias lla="ls -laF ${colorflag} ${opt}"
