@@ -1,5 +1,0 @@
-{
-    "cmd": ["texify", "-b", "-p", "--tex-option=\"--synctex=1\""],
-    "auto_match_enabled": true,
-    // "view_on_success": false,
-}

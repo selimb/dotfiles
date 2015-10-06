@@ -70,6 +70,7 @@ set cursorline    " Highlight line where cursor is.
 set wildmenu      " Show menu for autocomplete in ex mode.
 set laststatus=2  " Show statusline
 set statusline+=%F " Show current file in status line
+set statusline+=\ \-\-\ col:\ %c
 set hlsearch      " Highlight search.
 " =========================================================
 
