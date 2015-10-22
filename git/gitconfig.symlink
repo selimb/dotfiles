@@ -1,10 +1,10 @@
 [alias]
 # View the current working tree status using the short format
-	s = status -s
+    s = status -s
 # Amend the currently staged files to the latest commit
-	amend = commit --amend --reuse-message=HEAD
+    amend = commit --amend --reuse-message=HEAD
 # Unstage
-	unstage = reset HEAD
+    unstage = reset HEAD
 # Untrack file (still need to commit)
     untrack = rm --cached
 # one-line log
@@ -12,9 +12,11 @@
 # Show what has been added to the upstream after fetching
     ldiff = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short master..origin/master
 # Show last commit
-	last = log -1 HEAD
+    last = log -1 HEAD
+# Merge origin/master onto current branch
+    mom = merge origin/master
 # Show all aliases
-	alias = config --get-regexp ^alias\\.
+    alias = config --get-regexp ^alias\\.
 
 [apply]
 
