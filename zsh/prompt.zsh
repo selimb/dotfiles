@@ -177,6 +177,15 @@ POST_1_7_2_GIT=$(git_compare_version "1.7.2")
 #clean up the namespace slightly by removing the checker function
 unset -f git_compare_version
 
+# Only show host name if on Guillimin supercomputer, in which case show
+# "guillimin" instead of the random node.
+function host ()
+{
+    hostname=$(hostname)
+    if [ $hostname[0,4] = "lg-1" ]; then
+        echo "guillimin"
+    fi
+}
 
 function virtualenv_info ()
 {
@@ -201,7 +210,12 @@ local return_code='%{$fg[red]%}%(?,,[%?])'
 # %{$fg[blue]%}%n%{$reset_color%} in %{$fg[green]%}${PWD/#$HOME/~}%b%{$reset_color%} ›'
 PROMPT=$'\n'
 PROMPT+='%{$fg[cyan]%}%n%{$reset_color%}'
-PROMPT+=' on %{$fg[blue]%}%m%{$reset_color%}'
+
+local host=$(host)
+if [ $host ]; then
+    PROMPT+=' on %{$fg[blue]%}$host%{$reset_color%}'
+fi
+
 PROMPT+=' in %{$fg[green]%}${PWD/#$HOME/~}%b%{$reset_color%}'
 PROMPT+='$(git_prompt_info)'
 PROMPT+='$(virtualenv_info)%{$reset_color%}'
