@@ -213,7 +213,7 @@ PROMPT+='%{$fg[cyan]%}%n%{$reset_color%}'
 
 local host=$(host)
 if [ $host ]; then
-    PROMPT+=' on %{$fg[blue]%}$host%{$reset_color%}'
+    PROMPT+=' at %{$fg[blue]%}$host%{$reset_color%}'
 fi
 
 PROMPT+=' in %{$fg[green]%}${PWD/#$HOME/~}%b%{$reset_color%}'
