@@ -16,6 +16,7 @@ Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
 Plugin 'terryma/vim-multiple-cursors'
+Plugin 'AndrewRadev/linediff.vim'
 " Plugin 'reedes/vim-colors-pencil'
 " Plugin 'altercation/vim-colors-solarized'
 
@@ -38,7 +39,10 @@ set background=light
 set enc=utf-8
 " Fix delay when pressing O after Escape
 " See https://github.com/vim/vim/issues/24
-:set timeout timeoutlen=5000 ttimeoutlen=100
+set timeout timeoutlen=5000 ttimeoutlen=100
+" Smart case sensitiveness when searching
+set ignorecase
+set smartcase
 " =========================================================
 
 " =========================================================
@@ -89,6 +93,7 @@ let @c='0rC'
 " Remaps
 " =========================================================
 " Remap arrow keys to move between vim windows
+let mapleader=","
 " mouhahaha
 nnoremap <Right> <C-w>l
 nnoremap <Left> <C-w>h
@@ -96,6 +101,8 @@ nnoremap <Up> <C-w>k
 nnoremap <Down> <C-w>j
 " Search for visually selected text
 vnoremap // y/<C-R>"<CR>
+" Search for whole word.
+nnoremap <Leader>/ :exec "/\\<".input("Enter word. ")."\\>"<CR>
 " =========================================================
 
 let fortran_do_enddo=1
