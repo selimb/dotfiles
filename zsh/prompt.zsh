@@ -189,7 +189,7 @@ function host ()
 
 function virtualenv_info ()
 {
-  venv_info=" using %{$fg[yellow]%}"
+  venv_info=" using %{$fg_bold[yellow]%}"
   if [ $VIRTUAL_ENV ]; then
     echo "$venv_info"`basename $VIRTUAL_ENV`
   elif [ $CONDA_DEFAULT_ENV ]; then
@@ -198,28 +198,28 @@ function virtualenv_info ()
 }
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
-ZSH_THEME_GIT_PROMPT_PREFIX=" on %{$fg[magenta]%}"
+ZSH_THEME_GIT_PROMPT_PREFIX=" on %{$fg_bold[magenta]%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%}✗"
+ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg_bold[red]%}✗"
 # ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[yellow]%} [!]"
-ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%}✓"
+ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%}✓"
 
-local return_code='%{$fg[red]%}%(?,,[%?])'
+local return_code='%{$fg_bold[red]%}%(?,,[%?])'
 # local return_code="%(?..%{$fg[red]%}%? %{$reset_color%})"
 # PROMPT='
 # %{$fg[blue]%}%n%{$reset_color%} in %{$fg[green]%}${PWD/#$HOME/~}%b%{$reset_color%} ›'
 PROMPT=$'\n'
-PROMPT+='%{$fg[cyan]%}%n%{$reset_color%}'
+PROMPT+='%{$fg_bold[cyan]%}%n%{$reset_color%}'
 
 local host=$(host)
 if [ $host ]; then
-    PROMPT+=' at %{$fg[blue]%}$host%{$reset_color%}'
+    PROMPT+=' at %{$fg_bold[blue]%}$host%{$reset_color%}'
 fi
 
-PROMPT+=' in %{$fg[green]%}${PWD/#$HOME/~}%b%{$reset_color%}'
+PROMPT+=' in %{$fg_bold[green]%}${PWD/#$HOME/~}%b%{$reset_color%}'
 PROMPT+='$(git_prompt_info)'
 PROMPT+='$(virtualenv_info)%{$reset_color%}'
-PROMPT+=' % '$'\n''%{$fg[red]%}%(?,,[%?] )%{$reset_color%}'
+PROMPT+=' % '$'\n''%{$fg_bold[red]%}%(?,,[%?] )%{$reset_color%}'
 PROMPT+='$ '
 RPROMPT=''
 # RPS1='%{$fg[blue]%}%~%{$reset_color%} ${return_code} '
