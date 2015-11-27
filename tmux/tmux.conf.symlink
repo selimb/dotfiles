@@ -1,3 +1,5 @@
+# Use 256 colors
+# set -g default-terminal "xterm-256color"
 # Highlight current pane with red border
 set-option -g pane-active-border-fg red
 # Set tmux to use vi keys
