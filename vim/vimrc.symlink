@@ -17,6 +17,7 @@ Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'AndrewRadev/linediff.vim'
+Plugin 'LaTeX-Box-Team/LaTeX-Box'
 " Plugin 'reedes/vim-colors-pencil'
 " Plugin 'altercation/vim-colors-solarized'
 
@@ -43,6 +44,8 @@ set timeout timeoutlen=5000 ttimeoutlen=100
 " Smart case sensitiveness when searching
 set ignorecase
 set smartcase
+" Treat .tex files as latex
+let g:tex_flavor = "latex"
 " =========================================================
 
 " =========================================================
@@ -92,8 +95,9 @@ let @c='0rC'
 " =========================================================
 " Remaps
 " =========================================================
-" Remap arrow keys to move between vim windows
 let mapleader=","
+let maplocalleader="\\"
+" Remap arrow keys to move between vim windows
 " mouhahaha
 nnoremap <Right> <C-w>l
 nnoremap <Left> <C-w>h
