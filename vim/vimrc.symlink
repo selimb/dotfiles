@@ -30,7 +30,8 @@ filetype plugin indent on    " required
 " Colors
 " =========================================================
 syntax on
-set background=light
+set background=dark
+colorscheme brogrammer
 " =========================================================
 
 " =========================================================
