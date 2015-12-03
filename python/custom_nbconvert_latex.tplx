@@ -17,5 +17,10 @@
 ((* endblock docclass *))
 
 ((* block commands *))
+    ((( super() )))
     \setcounter{secnumdepth}{0}
 ((* endblock commands *))
+
+((* block predoc *))
+% no title
+((* endblock predoc *))
