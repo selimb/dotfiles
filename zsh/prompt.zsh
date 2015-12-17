@@ -187,39 +187,53 @@ function host ()
     fi
 }
 
+if [ $SUPPORTCOLORS ]; then
+    red="%{$fg_bold[red]%}"
+    green="%{$fg_bold[green]%}"
+    yellow="%{$fg_bold[yellow]%}"
+    blue="%{$fg_bold[blue]%}"
+    magenta="%{$fg_bold[magenta]%}"
+    cyan="%{$fg_bold[cyan]%}"
+else
+    red="%{$fg[red]%}"
+    green="%{$fg[green]%}"
+    yellow="%{$fg[yellow]%}"
+    blue="%{$fg[blue]%}"
+    magenta="%{$fg[magenta]%}"
+    cyan="%{$fg[cyan]%}"
+fi
+
 function virtualenv_info ()
 {
-  venv_info=" using %{$fg_bold[yellow]%}"
+  venv_info=" using "
+  venv_info+=${yellow}
   if [ $VIRTUAL_ENV ]; then
-    echo "$venv_info"`basename $VIRTUAL_ENV`
+    echo $venv_info`basename $VIRTUAL_ENV`
   elif [ $CONDA_DEFAULT_ENV ]; then
-    echo "$venv_info""$CONDA_DEFAULT_ENV"
+    echo $venv_info"$CONDA_DEFAULT_ENV"
   fi
 }
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
-ZSH_THEME_GIT_PROMPT_PREFIX=" on %{$fg_bold[magenta]%}"
+ZSH_THEME_GIT_PROMPT_PREFIX=' on '${magenta}
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg_bold[red]%}✗"
-# ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[yellow]%} [!]"
-ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%}✓"
+ZSH_THEME_GIT_PROMPT_DIRTY=${red}'✗'
+ZSH_THEME_GIT_PROMPT_CLEAN=${green}'✓'
 
-local return_code='%{$fg_bold[red]%}%(?,,[%?])'
-# local return_code="%(?..%{$fg[red]%}%? %{$reset_color%})"
-# PROMPT='
-# %{$fg[blue]%}%n%{$reset_color%} in %{$fg[green]%}${PWD/#$HOME/~}%b%{$reset_color%} ›'
+local return_code='$red''%(?,,[%?])'
 PROMPT=$'\n'
-PROMPT+='%{$fg_bold[cyan]%}%n%{$reset_color%}'
+PROMPT+=${cyan}'%n%{$reset_color%}'
 
 local host=$(host)
 if [ $host ]; then
-    PROMPT+=' at %{$fg_bold[blue]%}$host%{$reset_color%}'
+    PROMPT+=' at '${blue}'$host%{$reset_color%}'
 fi
 
-PROMPT+=' in %{$fg_bold[green]%}${PWD/#$HOME/~}%b%{$reset_color%}'
+PROMPT+=' in '${green}'${PWD/#$HOME/~}%b%{$reset_color%}'
 PROMPT+='$(git_prompt_info)'
-PROMPT+='$(virtualenv_info)%{$reset_color%}'
-PROMPT+=' % '$'\n''%{$fg_bold[red]%}%(?,,[%?] )%{$reset_color%}'
+PROMPT+=$(virtualenv_info)'%{$reset_color%}'
+PROMPT+=' % '$'\n'${red}'%(?,,[%?] )%{$reset_color%}'
 PROMPT+='$ '
 RPROMPT=''
-# RPS1='%{$fg[blue]%}%~%{$reset_color%} ${return_code} '
+
+unset red green yellow blue magenta cyan

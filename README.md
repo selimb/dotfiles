@@ -9,6 +9,11 @@ sudo apt-get install git
 [Generate SSH keys](https://help.github.com/articles/generating-ssh-keys/#platform-linux)
 Now you're ready to clone this.
 
+### 256 color terminal
+If your terminal supports 256 colors, add the following line to ``~/.localrc``:
+```
+SUPPORTCOLORS=1
+```
 ## Installation
 Start with
 ```bash
@@ -22,11 +27,11 @@ scripts/bootstrap
 ```
 Note that this will also install Sublime Text 3 along with the Package Manager -- and the User Packages of course.
 
-To setup packages: 
+To setup packages:
 ```bash
 scripts/install
 ```
-You will be prompted to confirm which ones you want to install unless you pass the `-y` flag. This may take a while. 
+You will be prompted to confirm which ones you want to install unless you pass the `-y` flag. This may take a while.
 
 ## Pyvenv Wrapper
 
