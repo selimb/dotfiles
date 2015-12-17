@@ -1,2 +1,5 @@
 # Let Vundle manage this.
 vim/vim.symlink/bundle
+
+# Vim junk
+.netrwhist
