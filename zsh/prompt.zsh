@@ -181,8 +181,7 @@ unset -f git_compare_version
 # "guillimin" instead of the random node.
 function host ()
 {
-    hostname=$(hostname)
-    if [ $hostname[0,4] = "lg-1" ]; then
+    if [ $GUILLIMIN ]; then
         echo "guillimin"
     fi
 }
