@@ -179,11 +179,14 @@ unset -f git_compare_version
 
 # Only show host name if on Guillimin supercomputer, in which case show
 # "guillimin" instead of the random node.
-function host ()
+function dothost ()
 {
-    if [ $GUILLIMIN ]; then
-        echo "guillimin"
+    if [ $GUILLIMIN_JOB_NODE ]; then
+        out="guillimin*"
+    elif [ $GUILLIMIN ]; then
+        out="guillimin"
     fi
+    echo "$out"
 }
 
 if [ $SUPPORTCOLORS ]; then
@@ -241,9 +244,10 @@ local return_code='$red''%(?,,[%?])'
 PROMPT=$'\n'
 PROMPT+=${cyan}'%n%{$reset_color%}'
 
-local host=$(host)
-if [ $host ]; then
-    PROMPT+=' at '${blue}'$host%{$reset_color%}'
+local host_info=$(dothost)
+if [ $host_info ]; then
+    PROMPT+=' at '${blue}$host_info'%{$reset_color%}'
+    echo $PROMPT > hello
 fi
 
 PROMPT+=' in '${green}'${PWD/#$HOME/~}%b%{$reset_color%}'
