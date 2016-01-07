@@ -214,11 +214,27 @@ function virtualenv_info ()
 }
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
-ZSH_THEME_GIT_PROMPT_PREFIX=' on '${magenta}
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_DIRTY=${red}'✗'
-ZSH_THEME_GIT_PROMPT_CLEAN=${green}'✓'
+function git_prompt ()
+{
+    STATUS="$(git_prompt_info)"
+    git_stat="$(git_prompt_status)"
+    if [ $git_stat ]; then
+        STATUS="$STATUS""[$git_stat]"
+    fi
+    echo "$STATUS"
+}
 
+ZSH_THEME_GIT_PROMPT_PREFIX=' on '${magenta}
+# ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_SUFFIX=""
+# ZSH_THEME_GIT_PROMPT_DIRTY=${red}'✗'
+ZSH_THEME_GIT_PROMPT_DIRTY=""
+# ZSH_THEME_GIT_PROMPT_CLEAN=${green}'✓'
+ZSH_THEME_GIT_PROMPT_CLEAN=""
+ZSH_THEME_GIT_PROMPT_ADDED="+"
+ZSH_THEME_GIT_PROMPT_MODIFIED="!"
+ZSH_THEME_GIT_PROMPT_UNTRACKED="?"
+ZSH_THEME_GIT_PROMPT_STASHED="$"
 local return_code='$red''%(?,,[%?])'
 PROMPT=$'\n'
 PROMPT+=${cyan}'%n%{$reset_color%}'
@@ -229,7 +245,7 @@ if [ $host ]; then
 fi
 
 PROMPT+=' in '${green}'${PWD/#$HOME/~}%b%{$reset_color%}'
-PROMPT+='$(git_prompt_info)'
+PROMPT+='$(git_prompt)%{$reset_color%}'
 PROMPT+=$(virtualenv_info)'%{$reset_color%}'
 PROMPT+=' % '$'\n'${red}'%(?,,[%?] )%{$reset_color%}'
 PROMPT+='$ '
