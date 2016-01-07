@@ -15,6 +15,11 @@
     last = log -1 HEAD
 # Merge origin/master onto current branch
     mom = merge origin/master
+# Ignore files locally
+# http://stackoverflow.com/questions/1753070/git-ignore-files-only-locally
+    ignore = update-index --assume-unchanged
+    unignore = update-index --no-assume-unchanged
+    ignored = !git ls-files -v | grep "^[[:lower:]]"
 # Show all aliases
     alias = config --get-regexp ^alias\\.
 
