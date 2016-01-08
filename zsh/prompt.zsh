@@ -247,7 +247,6 @@ PROMPT+=${cyan}'%n%{$reset_color%}'
 local host_info=$(dothost)
 if [ $host_info ]; then
     PROMPT+=' at '${blue}$host_info'%{$reset_color%}'
-    echo $PROMPT > hello
 fi
 
 PROMPT+=' in '${green}'${PWD/#$HOME/~}%b%{$reset_color%}'
