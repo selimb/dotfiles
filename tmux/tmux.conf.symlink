@@ -1,11 +1,12 @@
 # Highlight current pane with red border
 set-option -g pane-active-border-fg red
 # Set tmux to use vi keys
-# setw -g mode-keys vi
-# unbind [
-# bind Escape copy-mode
-# unbind p
-# bind p paste-buffer
-# bind-key -t vi-copy 'v' begin-selection
-# bind-key -t vi-copy 'y' copy-selection
+setw -g mode-keys vi
+# Normal mode
+bind Escape copy-mode # `tmux prefix + Escape` starts copy mode.
+bind p paste-buffer # `prefix + p` pastes the latest buffer
+# Copy mode
+bind-key -t vi-copy 'v' begin-selection  # `v` begins a selection. (movement keys to select the desired bits)
+bind-key -t vi-copy 'y' copy-selection # `y` copies the current selection to one of tmux's "paste buffers"
+bind -t vi-copy Y copy-end-of-line # ^1
 
