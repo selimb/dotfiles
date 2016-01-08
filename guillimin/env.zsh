@@ -1,13 +1,14 @@
 # Only show host name if on Guillimin supercomputer, in which case show
 # "guillimin" instead of the random node.
-hostname=$(hostname)
-if [ $hostname[0,4] = "lg-1" ]; then
+local hostname=$(hostname)
+local pattern="[a-z]{2}-[0-9][a-z][0-9]{2}-[a-z][0-9]{2}"
+if $(echo $hostname | grep -E $pattern &> /dev/null); then
     export GUILLIMIN=1
-elif [ $hostname[0,2] = "sw" ]; then
-    export GUILLIMIN=1
+fi
+# Not on login node
+if [ $hostname[0,2] != "lg" ]; then
     export GUILLIMIN_JOB_NODE=1
 fi
-unset hostname
 
 # PYTHONPATH
 local SYN3D=/sb/project/rck-371-aa/selimb/syn3d
