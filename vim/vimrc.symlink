@@ -11,15 +11,15 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
+" SNIPMATE
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
+
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'AndrewRadev/linediff.vim'
 Plugin 'LaTeX-Box-Team/LaTeX-Box'
-" Plugin 'reedes/vim-colors-pencil'
-" Plugin 'altercation/vim-colors-solarized'
 
 " All of your plugins must be added before the following line.
 call vundle#end()            " required
@@ -82,10 +82,25 @@ set ruler         " Always show cursor position.
 set number        " Show line numbers.
 set cursorline    " Highlight line where cursor is.
 set wildmenu      " Show menu for autocomplete in ex mode.
-set laststatus=2  " Show statusline
-set statusline+=%F " Show current file in status line
-set statusline+=\ \-\-\ col:\ %c
 set hlsearch      " Highlight search.
+" =========================================================
+
+" =========================================================
+" Status line
+" =========================================================
+function! GitBranch()
+  let branch = system("git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* //'")
+  if branch != ''
+    return substitute(branch, '\n', '', 'g')
+  en
+  return ''
+endfunction
+set laststatus=2  " Show statusline
+set statusline+=(%{GitBranch()})
+set statusline+=\ \ %F
+set statusline+=%3(%m%)
+set statusline+=%8((%l,%c)%)\            " line and column
+set statusline+=%P                        " percentage of file
 " =========================================================
 
 " =========================================================
