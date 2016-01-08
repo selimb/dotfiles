@@ -8,3 +8,7 @@ elif [ $hostname[0,2] = "sw" ]; then
     export GUILLIMIN_JOB_NODE=1
 fi
 unset hostname
+
+# PYTHONPATH
+local SYN3D=/sb/project/rck-371-aa/selimb/syn3d
+export PYTHONPATH="$SYN3D/python:$SYN3D/bin:$PYTHONPATH"
