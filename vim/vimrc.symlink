@@ -38,6 +38,10 @@ else
     set background=light
     colorscheme default
 endif
+highlight DiffAdd    term=bold ctermfg=2 ctermbg=7
+highlight DiffDelete term=bold ctermfg=2 ctermbg=7
+highlight DiffChange term=bold ctermfg=2 ctermbg=7
+highlight DiffText   term=standout cterm=bold ctermfg=7 ctermbg=1
 " =========================================================
 
 " =========================================================
@@ -53,6 +57,12 @@ set ignorecase
 set smartcase
 " Treat .tex files as latex
 let g:tex_flavor = "latex"
+" Have vimdiff ignore whitespace while normal vim doesn't
+" From http://vim.wikia.com/wiki/Ignore_white_space_in_vimdiff
+if &diff
+    " diff mode
+    set diffopt+=iwhite
+endif
 " =========================================================
 
 " =========================================================
@@ -104,7 +114,7 @@ set statusline+=%P                        " percentage of file
 " =========================================================
 
 " =========================================================
-" Macros
+" Macros & Functions
 " =========================================================
 " Fortran-specific
 " ---------------------------------------------------------
@@ -112,6 +122,8 @@ set statusline+=%P                        " percentage of file
 let @n='0lllllr&'
 " Insert comment
 let @c='0rC'
+" Find variable declaration
+command -nargs=1 Findvar vimgrep /\<<args>\>.*=/gj *.f
 " =========================================================
 
 " =========================================================
