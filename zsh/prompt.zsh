@@ -251,7 +251,7 @@ fi
 
 PROMPT+=' in '${green}'${PWD/#$HOME/~}%b%{$reset_color%}'
 PROMPT+='$(git_prompt)%{$reset_color%}'
-PROMPT+=$(virtualenv_info)'%{$reset_color%}'
+PROMPT+=$(virtualenv_info)' %{$reset_color%}'
 PROMPT+=' % '$'\n'${red}'%(?,,[%?] )%{$reset_color%}'
 PROMPT+='$ '
 RPROMPT=''
