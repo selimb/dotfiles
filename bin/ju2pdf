@@ -1,11 +1,15 @@
 #!/usr/bin/env bash
-# Convert an .ipynb to pdf through html with wkhtml2pdf
+# Convert an .ipynb to pdf through latex with custom template
 
 # Exit if command fails.
 set -e
+set -x
 
-input="$1"
-filename="${input%.*}"
-jupyter nbconvert --to html $input
-wkhtmltopdf --image-quality 300 $filename.html $filename.pdf
-rm $filename.html
+file="$1"
+template="custom_nbconvert_latex.tplx"
+cp ~/dotfiles/python/$template .
+jupyter nbconvert "$file" --to pdf --template "$template"
+rm "$template"
+filename="${file%.*}"
+rm -rf $filename"_files"
+
