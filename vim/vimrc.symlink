@@ -20,6 +20,9 @@ Plugin 'honza/vim-snippets'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'AndrewRadev/linediff.vim'
 Plugin 'LaTeX-Box-Team/LaTeX-Box'
+Plugin 'tpope/vim-surround.git'
+" Plugin 'reedes/vim-colors-pencil'
+" Plugin 'altercation/vim-colors-solarized'
 
 " All of your plugins must be added before the following line.
 call vundle#end()            " required
