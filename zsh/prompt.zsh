@@ -189,30 +189,13 @@ function dothost ()
     echo "$out"
 }
 
-if [ $SUPPORTCOLORS ]; then
-    red="%{$fg_bold[red]%}"
-    green="%{$fg_bold[green]%}"
-    yellow="%{$fg_bold[yellow]%}"
-    blue="%{$fg_bold[blue]%}"
-    magenta="%{$fg_bold[magenta]%}"
-    cyan="%{$fg_bold[cyan]%}"
-else
-    red="%{$fg[red]%}"
-    green="%{$fg[green]%}"
-    yellow="%{$fg[yellow]%}"
-    blue="%{$fg[blue]%}"
-    magenta="%{$fg[magenta]%}"
-    cyan="%{$fg[cyan]%}"
-fi
-
 function virtualenv_info ()
 {
-  venv_info=" using "
-  venv_info+=${yellow}
+  venv_info=" using %{$fg[yellow]%}"
   if [ $VIRTUAL_ENV ]; then
-    echo $venv_info`basename $VIRTUAL_ENV`
+    echo "$venv_info"`basename $VIRTUAL_ENV`
   elif [ $CONDA_DEFAULT_ENV ]; then
-    echo $venv_info"$CONDA_DEFAULT_ENV"
+    echo "$venv_info$CONDA_DEFAULT_ENV"
   fi
 }
 export VIRTUAL_ENV_DISABLE_PROMPT=1
@@ -227,12 +210,10 @@ function git_prompt ()
     echo "$STATUS"
 }
 
-ZSH_THEME_GIT_PROMPT_PREFIX=' on '${magenta}
+ZSH_THEME_GIT_PROMPT_PREFIX=' on '%{$fg[magenta]%}
 # ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX=""
-# ZSH_THEME_GIT_PROMPT_DIRTY=${red}'✗'
 ZSH_THEME_GIT_PROMPT_DIRTY=""
-# ZSH_THEME_GIT_PROMPT_CLEAN=${green}'✓'
 ZSH_THEME_GIT_PROMPT_CLEAN=""
 ZSH_THEME_GIT_PROMPT_ADDED="+"
 ZSH_THEME_GIT_PROMPT_MODIFIED="!"
@@ -240,20 +221,19 @@ ZSH_THEME_GIT_PROMPT_UNTRACKED="?"
 ZSH_THEME_GIT_PROMPT_STASHED="$"
 ZSH_THEME_GIT_PROMPT_AHEAD="↑"
 ZSH_THEME_GIT_PROMPT_BEHIND="↓"
-local return_code='$red''%(?,,[%?])'
 PROMPT=$'\n'
-PROMPT+=${cyan}'%n%{$reset_color%}'
+PROMPT+='%{$fg[cyan]%}%n%{$reset_color%}'
 
 local host_info=$(dothost)
 if [ $host_info ]; then
-    PROMPT+=' at '${blue}$host_info'%{$reset_color%}'
+    PROMPT+=' at %{$fg[blue]%}$host_info%{$reset_color%}'
 fi
 
-PROMPT+=' in '${green}'${PWD/#$HOME/~}%b%{$reset_color%}'
+PROMPT+=' in %{$fg[green]%}${PWD/#$HOME/~}%b%{$reset_color%}'
 PROMPT+='$(git_prompt)%{$reset_color%}'
-PROMPT+=$(virtualenv_info)' %{$reset_color%}'
-PROMPT+=' % '$'\n'${red}'%(?,,[%?] )%{$reset_color%}'
+PROMPT+='$(virtualenv_info) %{$reset_color%}'
+PROMPT+=' % '$'\n%{$reset_color%}'
+PROMPT+='%{$fg[red]%}%(?,,[%?] )%{$reset_color%}'
 PROMPT+='$ '
 RPROMPT=''
 
-unset red green yellow blue magenta cyan
