@@ -34,14 +34,8 @@ filetype plugin indent on    " required
 " =========================================================
 syntax on
 
-if $SUPPORTCOLORS
-    set term=screen-256color
-    set background=dark
-    colorscheme brogrammer
-else
-    set background=light
-    colorscheme default
-endif
+set background=dark
+colorscheme default
 highlight DiffAdd    term=bold ctermfg=2 ctermbg=7
 highlight DiffDelete term=bold ctermfg=2 ctermbg=7
 highlight DiffChange term=bold ctermfg=2 ctermbg=7
