@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+cat > main.tex <<- EOM
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{graphicx}
+
+\title{Your Paper}
+\author{You}
+
+\begin{document}
+\maketitle
+\end{document}
+EOM
