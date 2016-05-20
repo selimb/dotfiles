@@ -185,6 +185,8 @@ function dothost ()
         out="guillimin*"
     elif [ $GUILLIMIN ]; then
         out="guillimin"
+    else
+        out="$(hostname)"
     fi
     echo "$out"
 }
@@ -223,12 +225,7 @@ ZSH_THEME_GIT_PROMPT_AHEAD="↑"
 ZSH_THEME_GIT_PROMPT_BEHIND="↓"
 PROMPT=$'\n'
 PROMPT+='%{$fg[cyan]%}%n%{$reset_color%}'
-
-local host_info=$(dothost)
-if [ $host_info ]; then
-    PROMPT+=' at %{$fg[blue]%}$host_info%{$reset_color%}'
-fi
-
+PROMPT+=' at %{$fg[blue]%}$(dothost)%{$reset_color%}'
 PROMPT+=' in %{$fg[green]%}${PWD/#$HOME/~}%b%{$reset_color%}'
 PROMPT+='$(git_prompt)%{$reset_color%}'
 PROMPT+='$(virtualenv_info) %{$reset_color%}'
