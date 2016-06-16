@@ -186,7 +186,11 @@ function dothost ()
     elif [ $GUILLIMIN ]; then
         out="guillimin"
     else
-        out="$(hostname)"
+        if [ $host ]; then
+            out=$host
+        else
+            out="$(hostname)"
+        fi
     fi
     echo "$out"
 }
