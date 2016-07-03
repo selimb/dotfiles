@@ -1,0 +1,5 @@
+[
+    // Disable font size change with ctrl+scroll wheel
+    { "button": "scroll_down", "modifiers": ["ctrl"], "command": null },
+    { "button": "scroll_up", "modifiers": ["ctrl"], "command": null },
+]

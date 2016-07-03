@@ -1,0 +1,26 @@
+{
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"AlignTab",
+		"Anaconda",
+		"AutoHotkey",
+		"BracketHighlighter",
+		"Delete Lines",
+		"Emmet",
+		"Indent XML",
+		"jinja2-tmbundle",
+		"LaTeX-Plus",
+		"Monokai Gray",
+		"Open-Include",
+		"Package Control",
+		"PackageResourceViewer",
+		"Python Improved",
+		"SideBarEnhancements",
+		"Terminal",
+		"Theme - Brogrammer",
+		"View In Browser"
+	]
+}

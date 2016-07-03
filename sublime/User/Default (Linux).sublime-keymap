@@ -1,0 +1,69 @@
+[
+  { "keys": ["ctrl+alt+o"], "command" : "open_dir","args": {"dir": "$file_path", "file": "$file_name"}},
+  { "keys": ["ctrl+tab"], "command": "next_view" },
+  { "keys": ["ctrl+shift+tab"], "command": "prev_view" },
+  { "keys": ["ctrl+shift+l"], "command":"delete_lines"},
+  // Tab through certain characters
+  { "keys": ["tab"], "command": "move", "args": {"by": "characters", "forward": true}, "context":
+    [
+        { "key": "selection_empty", "operator": "equal", "operand": true },
+        { "key": "preceding_text", "operator": "not_regex_match", "operand": "[[:space:]]*", "match_all": true },
+        { "key": "following_text", "operator": "regex_contains", "operand": "^[\"'\\)\\}\\]\\$\\_]", "match_all": true },
+        { "key": "auto_complete_visible", "operator": "equal", "operand": false },
+        { "key": "has_next_field", "operator": "equal", "operand": false }
+    ]
+  },
+    { "keys": ["ctrl+alt+shift+t"], "command": "open_terminal" },
+  // Re-open last file
+  { "keys": ["ctrl+shift+t"], "command": "reopen_last_file" },
+  // Camel case
+  { "keys": ["ctrl+alt+u"], "command": "title_case"},
+  // Can't remember...
+  { "keys": ["ctrl+shift+alt+i"], "command": "insert_path", "args": {"type": "relative"} },
+  // Open project.
+  { "keys": ["ctrl+shift+o"], "command": "prompt_open_project_or_workspace"},
+  // Create new file relative to current file.
+  { "keys": ["ctrl+alt+n"], "command": "side_bar_new_file2"},
+  // Move file to new group.
+  { "keys": ["super+right"], "command": "new_pane"},
+  // Back to one group.
+  { "keys": ["super+left"], "command": "set_layout", "args": {"cells": "[[0, 0, 1, 1]]", "cols": "[0.0, 1.0]", "rows": "[0.0, 1.0]"} },
+  // Show console
+  { "keys": ["alt+`"], "command": "show_panel", "args": {"panel":"console", "toggle":true} },
+  // Column selection
+  { "keys": ["alt+up"], "command": "select_lines", "args": {"forward": false} },
+  { "keys": ["alt+down"], "command": "select_lines", "args": {"forward": true} },
+  /*
+  -----------------------------------------------------------------------------
+  PYTHON-SPECIFIC
+  -----------------------------------------------------------------------------
+  */
+  { "keys": ["shift+enter"], "command": "run_macro_file", "args": {"file": "Packages/Python/New-Doc-Param.sublime-macro"},
+  "context":
+    [
+      {"key": "selector", "operator": "equal", "operand": "source.python string.quoted.double.block.python"},
+      {"key": "selection_empty", "operator": "equal", "operand": true, "match_all": true}
+    ]
+  },
+  { "keys": ["shift+enter"], "command": "insert_snippet", "args": {"contents": "'$1': $2"}, "context":
+    [
+      { "key": "selector", "operator": "equal", "operand": "meta.structure.dictionary.python"},
+      {"key": "selection_empty", "operator": "equal", "operand": true, "match_all": true}
+    ]
+  },
+  /*
+  -----------------------------------------------------------------------------
+  JINJA
+  -----------------------------------------------------------------------------
+  */
+  { "keys": ["{"], "command": "insert", "args": {"characters": "{"}, "context":
+    [
+      {"key": "selector", "operator": "equal", "operand": "text.html.jinja2"}
+    ]
+  },
+  { "keys": ["tab"], "command": "expand_abbreviation_by_tab", "context" :
+    [
+      { "key": "selector", "operator": "equal", "operand": "text.html.jinja"}
+    ]
+  }
+]

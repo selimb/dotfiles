@@ -1,0 +1,12 @@
+<snippet>
+    <content><![CDATA[
+\begin{quote}
+\em ${1}
+\end{quote}
+$0
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>quote</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>text.tex</scope>
+</snippet>

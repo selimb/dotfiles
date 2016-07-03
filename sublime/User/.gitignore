@@ -1,0 +1,27 @@
+###Computer-Specific###
+AutoHotkey.sublime-settings
+
+###SublimeText###
+*.cache
+
+# SublimeText project files
+/*.sublime-project
+*.sublime-workspace
+sftp-config*.json
+Package Control.last-run
+Package Control.system-ca-bundle
+Package Control.merged-ca-bundle
+Package Control.cache/*
+SideBarEnhancements/*
+
+SublimeREPLHistory/__defaults__
+SublimeREPLHistory/__del_rows__
+SublimeREPLHistory/__id__
+SublimeREPLHistory/__info__
+SublimeREPLHistory/__pos__
+SublimeREPLHistory/__version__
+SublimeREPLHistory/_id_pos
+SublimeREPLHistory/changelog
+SublimeREPLHistory/command
+SublimeREPLHistory/external_id
+SublimeREPLHistory/ts
