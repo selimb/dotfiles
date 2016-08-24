@@ -10,8 +10,4 @@ if $(echo $hostname | grep -E $pattern &> /dev/null); then
     fi
 fi
 
-# PYTHONPATH
-SYN3D=/sb/project/rck-371-aa/selimb/syn3d
-export PYTHONPATH="$SYN3D/python:$SYN3D/bin:$PYTHONPATH"
-
-unset hostname pattern SYN3D
+unset hostname pattern
