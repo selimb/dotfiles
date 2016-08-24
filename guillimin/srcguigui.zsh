@@ -1,5 +1,5 @@
 if [ $GUILLIMIN ]; then
-    for file in *.guigui
+    for file in $ZSH/guillimin/*.guigui
     do
         source $file
     done
