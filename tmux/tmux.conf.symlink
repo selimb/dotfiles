@@ -3,10 +3,13 @@
 # Highlight current pane with red border
 set-option -g pane-active-border-fg red
 
+# Copy path to clipboard
+bind y run "tmux set-buffer \"#{pane_current_path}\""
+
 ## Saner Split Commands
 # split panes using | and -
-bind | split-window -h
-bind - split-window -v
+bind | split-window -h -c '#{pane_current_path}'
+bind - split-window -v -c '#{pane_current_path}'
 unbind '"'
 unbind %
 

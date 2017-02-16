@@ -12,17 +12,17 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " SNIPMATE
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-Plugin 'garbas/vim-snipmate'
-Plugin 'honza/vim-snippets'
+" Plugin 'MarcWeber/vim-addon-mw-utils'
+" Plugin 'tomtom/tlib_vim'
+" Plugin 'garbas/vim-snipmate'
+" Plugin 'honza/vim-snippets'
 
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'AndrewRadev/linediff.vim'
-Plugin 'LaTeX-Box-Team/LaTeX-Box'
+" Plugin 'terryma/vim-multiple-cursors'
+" Plugin 'AndrewRadev/linediff.vim'
+" Plugin 'LaTeX-Box-Team/LaTeX-Box'
 Plugin 'tpope/vim-surround.git'
 " Plugin 'reedes/vim-colors-pencil'
-" Plugin 'altercation/vim-colors-solarized'
+Plugin 'altercation/vim-colors-solarized'
 
 " All of your plugins must be added before the following line.
 call vundle#end()            " required
@@ -33,9 +33,12 @@ filetype plugin indent on    " required
 " Colors
 " =========================================================
 syntax on
-
-set background=dark
-colorscheme default
+let g:solarized_termcolors=256
+let g:solarized_termtrans=1
+set background=light
+" set background=dark
+" colorscheme default
+colorscheme solarized
 highlight DiffAdd    term=bold ctermfg=2 ctermbg=7
 highlight DiffDelete term=bold ctermfg=2 ctermbg=7
 highlight DiffChange term=bold ctermfg=2 ctermbg=7
@@ -96,17 +99,17 @@ set hlsearch      " Highlight search.
 " =========================================================
 " Status line
 " =========================================================
-function! GitBranch()
-  let branch = system("git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* //'")
-  if branch != ''
-    return substitute(branch, '\n', '', 'g')
-  en
-  return ''
-endfunction
+" function! GitBranch()
+"   let branch = system("git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* //'")
+"   if branch != ''
+"     return substitute(branch, '\n', '', 'g')
+"   en
+"   return ''
+" endfunction
 set laststatus=2  " Show statusline
-set statusline+=(%{GitBranch()})
+" set statusline+=(%{GitBranch()})
 set statusline+=\ \ %F
-set statusline+=%3(%m%)
+" set statusline+=%3(%m%)
 set statusline+=%8((%l,%c)%)\            " line and column
 set statusline+=%P                        " percentage of file
 " =========================================================
