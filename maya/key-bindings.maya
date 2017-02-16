@@ -34,12 +34,24 @@ if [[ "${terminfo[kcud1]}" != "" ]]; then
   bindkey "${terminfo[kcud1]}" down-line-or-search    # start typing + [Down-Arrow] - fuzzy find history backward
 fi
 
-if [[ "${terminfo[khome]}" != "" ]]; then
-  bindkey "${terminfo[khome]}" beginning-of-line      # [Home] - Go to beginning of line
-fi
-if [[ "${terminfo[kend]}" != "" ]]; then
-  bindkey "${terminfo[kend]}"  end-of-line            # [End] - Go to end of line
-fi
+# if [[ "${terminfo[khome]}" != "" ]]; then
+#   bindkey "${terminfo[khome]}" beginning-of-line      # [Home] - Go to beginning of line
+# fi
+# if [[ "${terminfo[kend]}" != "" ]]; then
+#   bindkey "${terminfo[kend]}"  end-of-line            # [End] - Go to end of line
+# fi
+# Use Ctrl+V followed by the key to find these out on a shell
+bindkey "^[[1~" beginning-of-line	# home on OS X (with custom terminal settings)
+bindkey "^[[1;5D" beginning-of-line 	# ctrl+left on linux
+bindkey "^[OH" beginning-of-line 	# home on linux
+bindkey "\e[H" beginning-of-line	# home on cygwin mintty
+bindkey "\e[1~": beginning-of-line
+
+bindkey "^[[4~" end-of-line		# end on OS X (with custom terminal settings)
+bindkey "^[OF" end-of-line		# end on linux
+bindkey "^[[1;5C" end-of-line		# ctrl+right on linux
+bindkey "\e[F" end-of-line 		    # end on cygwin mintty
+bindkey "\e[4~": end-of-line
 
 bindkey ' ' magic-space                               # [Space] - do history expansion
 
