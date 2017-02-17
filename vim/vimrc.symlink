@@ -12,15 +12,15 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " SNIPMATE
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-Plugin 'garbas/vim-snipmate'
-Plugin 'honza/vim-snippets'
-
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'AndrewRadev/linediff.vim'
-Plugin 'LaTeX-Box-Team/LaTeX-Box'
-Plugin 'tpope/vim-surround.git'
+" Plugin 'MarcWeber/vim-addon-mw-utils'
+" Plugin 'tomtom/tlib_vim'
+" Plugin 'garbas/vim-snipmate'
+" Plugin 'honza/vim-snippets'
+"
+" Plugin 'terryma/vim-multiple-cursors'
+" Plugin 'AndrewRadev/linediff.vim'
+" Plugin 'LaTeX-Box-Team/LaTeX-Box'
+" Plugin 'tpope/vim-surround.git'
 " Plugin 'reedes/vim-colors-pencil'
 " Plugin 'altercation/vim-colors-solarized'
 
@@ -34,8 +34,11 @@ filetype plugin indent on    " required
 " =========================================================
 syntax on
 
-set background=dark
+set background=light
 colorscheme default
+" Show trailing whitespace:
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
 highlight DiffAdd    term=bold ctermfg=2 ctermbg=7
 highlight DiffDelete term=bold ctermfg=2 ctermbg=7
 highlight DiffChange term=bold ctermfg=2 ctermbg=7
@@ -117,11 +120,15 @@ set statusline+=%P                        " percentage of file
 " Fortran-specific
 " ---------------------------------------------------------
 " Insert continuation line character
-let @n='0lllllr&'
+let @n='0lllllr.'
 " Insert comment
 let @c='0rC'
+" Insert temporary block
+let @t='STEMP0rCoiCO'
 " Find variable declaration
-command -nargs=1 Findvar vimgrep /\<<args>\>.*=/gj *.f
+command -nargs=1 Findvar vimgrep /\(\<<args>\>.*=\|READ.*\<<args>\>\)/gj *.f
+" Find in FORTRAN files
+command -nargs=1 Vimgrepf vimgrep/<args>/gj *.f
 " =========================================================
 
 " =========================================================
@@ -141,4 +148,6 @@ vnoremap // y/<C-R>"<CR>
 nnoremap <Leader>/ :exec "/\\<".input("Enter word. ")."\\>"<CR>
 " =========================================================
 
+" set foldmethod=syntax
 let fortran_do_enddo=1
+" let fortran_fold=1
