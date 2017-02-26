@@ -1,0 +1,10 @@
+Font=Consolas
+FontHeight=12
+BoldAsFont=yes
+Term=xterm-256color
+BoldAsColour=yes
+AllowBlinking=no
+Transparency=medium
+OpaqueWhenFocused=yes
+CursorType=block
+CtrlShiftShortcuts=yes
