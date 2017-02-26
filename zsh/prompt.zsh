@@ -91,16 +91,10 @@ unset -f git_compare_version
 # "guillimin" instead of the random node.
 function dothost ()
 {
-    if [ $GUILLIMIN_JOB_NODE ]; then
-        out="guillimin*"
-    elif [ $GUILLIMIN ]; then
-        out="guillimin"
+    if [ $host ]; then
+        out=$host
     else
-        if [ $host ]; then
-            out=$host
-        else
-            out="$(hostname)"
-        fi
+        out="$(hostname)"
     fi
     echo "$out"
 }

@@ -1,0 +1,30 @@
+local ext=$1 docompinit=$2
+# all of our zsh files
+typeset -U config_files
+config_files=($ZSH/**/*.$ext)
+
+# load the env files
+for file in ${(M)config_files:#*/env.$ext}
+do
+  source $file
+done
+
+# load everything but the path, env and completion files
+for file in ${${config_files:#*/env.$ext}:#*/completion.$ext}
+do
+  source $file
+done
+
+# initialize autocomplete here, otherwise functions won't be loaded
+if [[ $docompinit = "yes" ]]; then
+    autoload -U compinit
+    compinit
+fi
+
+# load every completion after autocomplete loads
+for file in ${(M)config_files:#*/completion.$ext}
+do
+  source $file
+done
+
+unset config_files

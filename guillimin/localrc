@@ -1,0 +1,10 @@
+export DOT_GUIGUI=TRUE
+
+hostname=$(hostname)
+if [ $hostname[0,2] != "lg" ]; then
+    export host="guillimin*"
+else
+    export host="guillimin"
+fi
+
+unset hostname

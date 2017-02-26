@@ -1,0 +1,6 @@
+SUPPORTCOLORS=1
+export host="Selim-MacBook"
+
+export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin:$PATH"
+
+export DOT_OSX=TRUE
