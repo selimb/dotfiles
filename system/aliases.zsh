@@ -47,8 +47,8 @@ alias subl='subl -a'
 
 # Make temporary directory and cd into it.
 alias tmp='mkdir tmp && cd tmp'
-# Untar
 
+# Untar
 alias untar="tar xvzf"
 
 # Recursive grep with line numbers on non-binary files
