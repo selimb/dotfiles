@@ -22,7 +22,7 @@ Plugin 'VundleVim/Vundle.vim'
 " Plugin 'LaTeX-Box-Team/LaTeX-Box'
 " Plugin 'tpope/vim-surround.git'
 " Plugin 'reedes/vim-colors-pencil'
-" Plugin 'altercation/vim-colors-solarized'
+Plugin 'altercation/vim-colors-solarized'
 
 " All of your plugins must be added before the following line.
 call vundle#end()            " required
@@ -35,10 +35,10 @@ filetype plugin indent on    " required
 syntax on
 
 set background=light
-colorscheme default
 " Show trailing whitespace:
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
+colorscheme solarized
 highlight DiffAdd    term=bold ctermfg=2 ctermbg=7
 highlight DiffDelete term=bold ctermfg=2 ctermbg=7
 highlight DiffChange term=bold ctermfg=2 ctermbg=7
