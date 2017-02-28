@@ -13,6 +13,9 @@ bind - split-window -v -c '#{pane_current_path}'
 unbind '"'
 unbind %
 
+# Clear history
+bind -n C-k clear-history
+
 # Set tmux to use vi keys
 setw -g mode-keys vi
 # Normal mode
@@ -23,6 +26,8 @@ bind-key -t vi-copy 'v' begin-selection  # `v` begins a selection. (movement key
 bind-key -t vi-copy 'y' copy-selection # `y` copies the current selection to one of tmux's "paste buffers"
 bind -t vi-copy Y copy-end-of-line # ^1
 
+set-window-option -g xterm-keys on # Enables ctrl+arrow (and maybe other stuff)
+
+# Makes start-directory for new windows/panes work
 set -g default-command $SHELL
-set-window-option -g xterm-keys on
 set-environment -g CHERE_INVOKING 1
