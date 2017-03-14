@@ -3,3 +3,6 @@ alias home='cd $PROJECT'
 
 # Request job node
 alias jobnode='qsub -I -l walltime=6:00:00,nodes=1:ppn=16 -A rck-371-aa'
+
+# View job status
+alias j='less ~/JOBS'
