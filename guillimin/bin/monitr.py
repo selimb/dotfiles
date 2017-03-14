@@ -31,8 +31,6 @@ def submit(info):
     print 'submit -- ', info
     lines = open(JOB_IN).readlines()
     out = open(JOB_OUT, 'w')
-    has_start = False
-    has_finish = False
     for i, line in enumerate(lines):
         if line.startswith('mpiexec'):
             run_line = i
@@ -47,7 +45,8 @@ def submit(info):
     out.write(CMD_LINE % 'finish')
     out.writelines(lines[run_line+1:])
     out.close()
-    p = subprocess.Popen('qsub %s' % JOB_OUT, stdout=subprocess.PIPE, shell=True)
+    cmd = 'qsub %s' % JOB_OUT
+    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
     out, _ = p.communicate()
     jobid = format_jobid(out)
     workdir = os.getcwd()
@@ -66,6 +65,6 @@ if __name__ == '__main__':
     if cmd == 'submit':
         info = argv[1]
         submit(info)
-    elif cmd == 'start' or cmd == 'finish'
+    elif cmd == 'start' or cmd == 'finish':
         jobid, workdir = argv[1:]
         progress(cmd.upper(), jobid, workdir)
