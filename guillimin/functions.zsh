@@ -1,7 +1,7 @@
 # Grep fortran files with case insensitive
 grepf () {
     echo "$1"
-    grep -nHIi "$1" *.f
+    grep -nHIi "$1" *.f *.F
 }
 
 # Grep fortran files for a variable assignment
@@ -17,7 +17,7 @@ findvar () {
     if [ $1 ]; then
         results=$(grep "$grepopts" "$pattern" $*)
     else
-        results=$(grep "$grepopts" "$pattern" *.f)
+        results=$(grep "$grepopts" "$pattern" *.f *.F)
     fi
     echo "$results"
 }
