@@ -111,7 +111,7 @@ if hidegit != '1'
   set statusline+=(%{GitBranch()})
 endif
 set statusline+=\ \ %F
-" set statusline+=%3(%m%)
+set statusline+=%3(%m%)
 set statusline+=%8((%l,%c)%)\            " line and column
 set statusline+=%P                        " percentage of file
 " =========================================================
