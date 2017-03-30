@@ -1,9 +1,3 @@
-# Grep fortran files with case insensitive
-grepf () {
-    echo "$1"
-    grep -nHIi "$1" *.f *.F
-}
-
 # Grep fortran files for a variable assignment
 # Grep options: -n Show line number
 #               -H With filename

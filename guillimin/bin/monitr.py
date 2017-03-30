@@ -68,3 +68,7 @@ if __name__ == '__main__':
     elif cmd == 'start' or cmd == 'finish':
         jobid, workdir = argv[1:]
         progress(cmd.upper(), jobid, workdir)
+    else:
+        print 'Available commands:'
+        print 'submit INFO'
+        print 'start/finish JOBID WORKDIR'
