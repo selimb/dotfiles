@@ -1,7 +1,10 @@
 # Use 256 colors
 # set -g default-terminal "xterm-256color"
 # Highlight current pane with red border
-set-option -g pane-active-border-fg red
+# set-option -g pane-active-border-fg red
+
+# Add session name to status bar
+set -g status-left ' [#S] '
 
 # Copy path to clipboard
 bind y run "tmux set-buffer \"#{pane_current_path}\""
@@ -18,16 +21,28 @@ bind -n C-k clear-history
 
 # Set tmux to use vi keys
 setw -g mode-keys vi
+
 # Normal mode
-bind Escape copy-mode # `tmux prefix + Escape` starts copy mode.
-bind p paste-buffer # `prefix + p` pastes the latest buffer
+# bind Escape copy-mode # `tmux prefix + Escape` starts copy mode.
+# bind p paste-buffer # `prefix + p` pastes the latest buffer
 # Copy mode
-bind-key -t vi-copy 'v' begin-selection  # `v` begins a selection. (movement keys to select the desired bits)
-bind-key -t vi-copy 'y' copy-selection # `y` copies the current selection to one of tmux's "paste buffers"
-bind -t vi-copy Y copy-end-of-line # ^1
+# bind -t vi-copy 'v' begin-selection  # `v` begins a selection. (movement keys to select the desired bits)
+# bind -t vi-copy 'y' copy-selection  # `y` copies the current selection to one of tmux's "paste buffers"
+# bind -t vi-copy Y copy-end-of-line # ^1
 
 set-window-option -g xterm-keys on # Enables ctrl+arrow (and maybe other stuff)
 
 # Makes start-directory for new windows/panes work
 set -g default-command $SHELL
 set-environment -g CHERE_INVOKING 1
+
+# Enable selecting panes with mouse
+set -g mouse on
+
+# Copy to system clipboard
+# Requires xclip
+# https://unix.stackexchange.com/a/349020
+# https://www.freecodecamp.org/news/tmux-in-practice-integration-with-system-clipboard-bcd72c62ff7b/
+set-option -s set-clipboard off
+bind-key -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "xclip -i -f -selection primary | xclip -i -selection clipboard"
+bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "xclip -selection clipboard -i"

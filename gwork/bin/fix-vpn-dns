@@ -1,0 +1,17 @@
+#!/usr/bin/env python3
+import os
+from pathlib import Path
+import sys
+
+if os.geteuid() != 0:
+    exit("You need to have root privileges to run this script.\nPlease try again, this time using 'sudo'. Exiting.")
+
+RESOLV_CONF = Path("/etc/resolv.conf")
+LOCAL_NAMESERVER_LINE = "nameserver 127.0.0.53\n"
+
+lines = RESOLV_CONF.read_text().splitlines(True)
+lines_new = [
+    LOCAL_NAMESERVER_LINE.rstrip() + "  # moved by fix-vpn-dns\n",
+    *[line for line in lines if line != LOCAL_NAMESERVER_LINE]
+]
+RESOLV_CONF.write_text("".join(lines_new))

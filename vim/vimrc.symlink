@@ -1,39 +1,20 @@
-" =========================================================
-"  Vundle configuration
-" =========================================================
-set nocompatible    " Required
-filetype off        " Required
-
-" Set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-
-" SNIPMATE
-" Plugin 'MarcWeber/vim-addon-mw-utils'
-" Plugin 'tomtom/tlib_vim'
-" Plugin 'garbas/vim-snipmate'
-" Plugin 'honza/vim-snippets'
-"
-Plugin 'altercation/vim-colors-solarized'
-
-" All of your plugins must be added before the following line.
-call vundle#end()            " required
-filetype plugin indent on    " required
-" =========================================================
+" Don't try to be vi compatible
+set nocompatible
+" Screw swap files
+set noswapfile
+" Don't use clipboard as default register
+set clipboard:
 
 " =========================================================
 " Colors
 " =========================================================
 syntax on
-" Solarized colorscheme
-set t_Co=256
-let g:solarized_termcolors=256
-let g:solarized_termtrans=1
-set background=light
-colorscheme solarized
+" " Solarized colorscheme
+" set t_Co=256
+" let g:solarized_termcolors=256
+" let g:solarized_termtrans=1
+" set background=light
+" colorscheme solarized
 " Show trailing whitespace:
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
@@ -83,6 +64,9 @@ fun! <SID>StripTrailingWhitespaces()
     call cursor(l, c)
 endfun
 autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+" Visualize tabs and newlines
+set list
+set listchars=tab:>-
 " =========================================================
 
 " =========================================================
@@ -121,16 +105,7 @@ set statusline+=%P                        " percentage of file
 " =========================================================
 " Fortran-specific
 " ---------------------------------------------------------
-" Insert continuation line character
-let @n='0lllllr.'
-" Insert comment
-let @c='0rC'
-" Insert temporary block
-let @t='STEMP0rCoiCO'
-" Find variable declaration
-command -nargs=1 Findvar vimgrep /\(\<<args>\>.*=\|READ.*\<<args>\>\)/gj *.f
-" Find in FORTRAN files
-command -nargs=1 Vimgrepf vimgrep/<args>/gj *.f
+let fortran_do_enddo=1
 " =========================================================
 
 " =========================================================
@@ -149,7 +124,3 @@ vnoremap // y/<C-R>"<CR>
 " Search for whole word.
 nnoremap <Leader>/ :exec "/\\<".input("Enter word. ")."\\>"<CR>
 " =========================================================
-
-" set foldmethod=syntax
-let fortran_do_enddo=1
-" let fortran_fold=1

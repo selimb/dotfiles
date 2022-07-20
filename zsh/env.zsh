@@ -1,4 +1,3 @@
 # Use vim instead of stupid Nano
-export VISUAL=vi
+export VISUAL=vim
 export EDITOR=$VISUAL
-

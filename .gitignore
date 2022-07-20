@@ -1,5 +1,4 @@
-# Let Vundle manage this.
-vim/vim.symlink/bundle
+*.local
 
 #### joe made this: http://goel.io/joe
 
@@ -10,4 +9,3 @@ vim/vim.symlink/bundle
 Session.vim
 .netrwhist
 *~
-

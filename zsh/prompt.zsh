@@ -87,18 +87,6 @@ POST_1_7_2_GIT=$(git_compare_version "1.7.2")
 #clean up the namespace slightly by removing the checker function
 unset -f git_compare_version
 
-# Only show host name if on Guillimin supercomputer, in which case show
-# "guillimin" instead of the random node.
-function dothost ()
-{
-    if [ $host ]; then
-        out=$host
-    else
-        out="$(hostname)"
-    fi
-    echo "$out"
-}
-
 function virtualenv_info ()
 {
   venv_info=" using %{$fg[yellow]%}"
@@ -136,7 +124,7 @@ ZSH_THEME_GIT_PROMPT_BEHIND="↓"
 PROMPT=$'\n'
 PROMPT+='%{$fg[yellow]%}[%T]%{$reset_color%}'
 PROMPT+=' %{$fg[cyan]%}%n%{$reset_color%}'
-PROMPT+=' at %{$fg[blue]%}$(dothost)%{$reset_color%}'
+PROMPT+=' at %{$fg[blue]%}$(hostname)%{$reset_color%}'
 PROMPT+=' in %{$fg[green]%}${PWD/#$HOME/~}%b%{$reset_color%}'
 PROMPT+='$(git_prompt)%{$reset_color%}'
 PROMPT+='$(virtualenv_info) %{$reset_color%}'
@@ -144,4 +132,3 @@ PROMPT+=' % '$'\n%{$reset_color%}'
 PROMPT+='%{$fg[red]%}%(?,,[%?] )%{$reset_color%}'
 PROMPT+='$ '
 RPROMPT=''
-

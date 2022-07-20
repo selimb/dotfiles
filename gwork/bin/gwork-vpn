@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+
+set -eux
+
+server=${VPN_SERVER}
+username=${VPN_USERNAME}
+pidfile=/run/openconnect.pid
+fix_vpn_dns=$(command -v fix-vpn-dns)
+
+usage() {
+    echo "USAGE: $(basename $0) up|down|status"
+    exit 1
+}
+
+if [ $# -ne 1 ]; then
+    echo "missing arg"
+    usage
+fi
+
+vpn_up() {
+    # Inspired by https://github.com/archf/vpn-split-dns/blob/master/vpn
+    if [ -f $pidfile ]; then
+        pid=$(cat pidfile)
+        echo "openconnect process already running at pid=$pid"
+    else
+        sudo openconnect --background "--pid-file=$pidfile" "--user=$username" "$server"
+        sudo $fix_vpn_dns
+    fi
+}
+
+vpn_down() {
+    if [ -f $pidfile ]; then
+        pid="$(cat $pidfile)"
+        sudo kill -SIGINT $pid
+        sudo rm $pidfile
+    else
+        echo "openconnect process is not running"
+    fi
+}
+
+vpn_status() {
+    if [ -f $pidfile ]; then
+        pid="$(cat $pidfile)"
+        echo "openconnect running under process $pid"
+    else
+        echo "openconnect process is not running"
+    fi
+}
+
+cmd="$1"
+case $cmd in
+up)
+    vpn_up
+    ;;
+down)
+    vpn_down
+    ;;
+status)
+    vpn_status
+    ;;
+*)
+    usage
+    ;;
+esac

@@ -1,7 +1,7 @@
 local ext=$1 docompinit=$2
 # all of our zsh files
 typeset -U config_files
-config_files=($ZSH/**/*.$ext)
+config_files=($DOTFILES/**/*.$ext)
 
 # load the env files
 for file in ${(M)config_files:#*/env.$ext}

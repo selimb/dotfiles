@@ -1,2 +1,0 @@
-https://github.com/Kreger51/LaTeX-Plus.git
-https://github.com/Kreger51/WinMerge.git

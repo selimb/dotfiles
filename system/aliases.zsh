@@ -8,8 +8,7 @@ alias -- -="cd -"
 
 # Shortcuts
 alias dot='cd ~/dotfiles'
-alias p="cd ~/Projects"
-alias s="cd ~/School"
+alias p="cd ~/dev/Projects"
 
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
@@ -39,11 +38,6 @@ alias ls="command ls ${colorflag} ${opt}"
 
 # Enable aliases to be sudo’ed
 alias sudo='sudo '
-
-# Allows opening directory in current window with subl
-# If you ever do want to open a folder/file in a new
-# window, add the -n flag.
-alias subl='subl -a'
 
 # Make temporary directory and cd into it.
 alias tmp='mkdir tmp && cd tmp'

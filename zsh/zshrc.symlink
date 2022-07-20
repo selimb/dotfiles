@@ -1,23 +1,17 @@
-# shortcut to this dotfiles path is $ZSH
-export ZSH=$HOME/dotfiles
+# shortcut to this dotfiles path
+export DOTFILES=$HOME/dotfiles
 
-# Stash your environment variables in ~/.localrc. This means they'll stay out
-# of your main dotfiles repository (which may be public, like this one), but
-# you'll have access to them in your scripts.
-if [[ -a ~/.localrc ]]
+# Local settings
+if [[ -a "$DOTFILES/env.zsh.local" ]]
 then
-  source ~/.localrc
+  source "$DOTFILES/env.zsh.local"
 fi
 
-source $ZSH/zsh/source_files "zsh" "yes"
-if [[ $DOT_MAYA = "TRUE" ]]; then
-    source $ZSH/zsh/source_files "maya"
+source $DOTFILES/zsh/source_files "zsh" "yes"
+
+if [[ $DOTFILES_GWORK = "TRUE" ]]; then
+    source $DOTFILES/zsh/source_files "gwork"
 fi
-if [[ $DOT_GUIGUI = "TRUE" ]]; then
-    source $ZSH/zsh/source_files "guigui"
-fi
-if [[ $DOT_OSX = "TRUE" ]]; then
-    source $ZSH/zsh/source_files "osx"
-fi
+
 # ls_colors for solarized
-eval `dircolors $ZSH/zsh/dircolors.ansi-light`
+# eval `dircolors $DOTFILES/zsh/dircolors.ansi-light`
