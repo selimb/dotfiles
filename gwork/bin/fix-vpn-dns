@@ -1,17 +1,40 @@
 #!/usr/bin/env python3
+import difflib
 import os
 from pathlib import Path
 import sys
-
-if os.geteuid() != 0:
-    exit("You need to have root privileges to run this script.\nPlease try again, this time using 'sudo'. Exiting.")
+import textwrap
 
 RESOLV_CONF = Path("/etc/resolv.conf")
 LOCAL_NAMESERVER_LINE = "nameserver 127.0.0.53\n"
 
-lines = RESOLV_CONF.read_text().splitlines(True)
-lines_new = [
-    LOCAL_NAMESERVER_LINE.rstrip() + "  # moved by fix-vpn-dns\n",
-    *[line for line in lines if line != LOCAL_NAMESERVER_LINE]
-]
-RESOLV_CONF.write_text("".join(lines_new))
+def log(*args):
+    print("[fix-vpn-dns]", *args)
+
+def main():
+    if os.geteuid() != 0:
+        log("ERROR", "You need to have root privileges to run this script.\nPlease try again, this time using 'sudo'. Exiting.")
+        sys.exit(1)
+
+    log(f"Patching '{RESOLV_CONF}'...")
+
+    contents = RESOLV_CONF.read_text()
+    if LOCAL_NAMESERVER_LINE not in contents:
+        log(f"{LOCAL_NAMESERVER_LINE!r} not found. Nothing to do.")
+        return
+
+    lines = contents.splitlines(True)
+    lines_new = [
+        LOCAL_NAMESERVER_LINE.rstrip() + "  # moved by fix-vpn-dns\n",
+        *[line for line in lines if line != LOCAL_NAMESERVER_LINE]
+    ]
+    contents_new = "".join(lines_new)
+
+    differ = difflib.Differ()
+    diff = "".join(differ.compare(lines, lines_new))
+    log(f"Replacing with:\n{textwrap.indent(diff, ' ' * 4)}")
+
+    RESOLV_CONF.write_text(contents_new)
+
+if __name__ == "__main__":
+    main()
