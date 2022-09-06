@@ -60,6 +60,9 @@
 [diff]
     tool = vimdiff
 
+[submodule]
+    recurse = true
+
 [include]
     # Local settings
     path = ~/dotfiles/git/gitconfig.local
