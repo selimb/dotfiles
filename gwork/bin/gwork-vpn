@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 set -eux
+set -o pipefail
 
 server=${VPN_SERVER}
 username=${VPN_USERNAME}
@@ -23,9 +24,14 @@ vpn_up() {
         pid=$(cat $pidfile)
         echo "openconnect process already running at pid=$pid"
     else
-        op item get '(Garda) sbelhaouane' --fields label=password 2>&1 |
-            cat - <(echo 1) |
-            sudo openconnect --background "--pid-file=$pidfile" "--user=$username" "$server" --passwd-on-stdin
+        openconnect_command="sudo openconnect --background "--pid-file=$pidfile" "--user=$username" "$server""
+        if [[ -v ASKPASS ]]; then
+            $openconnect_command
+        else
+            op item get '(Garda) sbelhaouane' --fields label=password 2>&1 |
+                cat - <(echo 1) |
+                $openconnect_command --passwd-on-stdin
+        fi
         # Wait for openconnect to change resolv.conf
         sleep 2s
         sudo $fix_vpn_dns
