@@ -12,8 +12,12 @@
     # tree = log --graph --decorate --pretty=oneline --abbrev-commit
     tree = l --graph
 
+    # Reset to remote branch
+    rhu = reset --hard @{u}
+
     # Show all aliases
     alias = config --get-regexp ^alias\\.
+
 
 [apply]
 
@@ -66,3 +70,5 @@
 [include]
     # Local settings
     path = ~/dotfiles/git/gitconfig.local
+[init]
+	defaultBranch = main
