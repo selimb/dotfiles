@@ -18,6 +18,17 @@ if [ $# -ne 1 ]; then
     usage
 fi
 
+set +x
+resolvconf_dir="/etc/systemd/resolved.conf.d"
+gwork_resolvconf_path="${resolvconf_dir}/gwork.conf"
+gwork_resolvconf=$(
+    cat <<EOF
+[Resolve]
+DNS=10.10.2.36 10.10.2.37
+EOF
+)
+set -x
+
 vpn_up() {
     # Inspired by https://github.com/archf/vpn-split-dns/blob/master/vpn
     if [ -f $pidfile ]; then
@@ -32,17 +43,22 @@ vpn_up() {
                 cat - <(echo 1) |
                 $openconnect_command --passwd-on-stdin
         fi
+        # TODO: Don't think we need this anymore.
         # Wait for openconnect to change resolv.conf
-        sleep 2s
-        sudo $fix_vpn_dns
+        # sleep 2s
+        # sudo $fix_vpn_dns
+        sudo mkdir -p "$resolvconf_dir"
+        echo "$gwork_resolvconf" | sudo tee "$gwork_resolvconf_path" >/dev/null
+        sudo systemctl restart systemd-resolved.service
     fi
 }
 
 vpn_down() {
+    sudo rm -rf "$gwork_resolvconf_path"
     if [ -f $pidfile ]; then
         pid="$(cat $pidfile)"
         sudo kill -SIGINT $pid
-        sudo rm $pidfile
+        sudo rm -rf $pidfile
     else
         echo "openconnect process is not running"
     fi
