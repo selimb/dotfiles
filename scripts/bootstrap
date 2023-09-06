@@ -121,7 +121,7 @@ install_dotfiles
 if is_installed nemo; then
   nemo_dir="$HOME/.local/share/nemo"
   mkdir -p "$nemo_dir"
-  link_file "$DOTFILES_ROOT/nemo/actions" "$nemo_dir/actions/"
+  link_file "$DOTFILES_ROOT/nemo/actions" "$nemo_dir/actions"
 fi
 
 echo ''
