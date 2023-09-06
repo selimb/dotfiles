@@ -3,41 +3,50 @@ DOTFILES_ROOT=$(pwd)
 
 # From https://github.com/holman/dotfiles/blob/master/script/bootstrap
 
-info () {
+info() {
   printf "  [ \033[00;34m..\033[0m ] $1"
 }
 
-user () {
+user() {
   printf "\r  [ \033[0;33m?\033[0m ] $1 "
 }
 
-success () {
+success() {
   printf "\r\033[2K  [ \033[00;32mOK\033[0m ] $1\n"
 }
 
-fail () {
+fail() {
   printf "\r\033[2K  [\033[0;31mFAIL\033[0m] $1\n"
   echo ''
 }
 
-link_file () {
+is_installed() {
+  local exe="$1"
+
+  # https://stackoverflow.com/a/677212/3019965
+  if command -v "$exe" &>/dev/null; then
+    return 0
+  else
+    info "$exe is not installed. Skipping."
+    return 1
+  fi
+}
+
+link_file() {
   local src=$1 dst=$2
 
   local overwrite= backup= skip=
   local action=
 
-  if [ -f "$dst" -o -d "$dst" -o -L "$dst" ]
-  then
+  if [ -f "$dst" -o -d "$dst" -o -L "$dst" ]; then
 
-    if [ "$overwrite_all" == "false" ] && [ "$backup_all" == "false" ] && [ "$skip_all" == "false" ]
-    then
+    if [ "$overwrite_all" == "false" ] && [ "$backup_all" == "false" ] && [ "$skip_all" == "false" ]; then
 
       local currentSrc="$(readlink $dst)"
 
-      if [ "$currentSrc" == "$src" ]
-      then
+      if [ "$currentSrc" == "$src" ]; then
 
-        skip=true;
+        skip=true
 
       else
 
@@ -46,20 +55,25 @@ link_file () {
         read -n 1 action
 
         case "$action" in
-          o )
-            overwrite=true;;
-          O )
-            overwrite_all=true;;
-          b )
-            backup=true;;
-          B )
-            backup_all=true;;
-          s )
-            skip=true;;
-          S )
-            skip_all=true;;
-          * )
-            ;;
+        o)
+          overwrite=true
+          ;;
+        O)
+          overwrite_all=true
+          ;;
+        b)
+          backup=true
+          ;;
+        B)
+          backup_all=true
+          ;;
+        s)
+          skip=true
+          ;;
+        S)
+          skip_all=true
+          ;;
+        *) ;;
         esac
 
       fi
@@ -70,44 +84,45 @@ link_file () {
     backup=${backup:-$backup_all}
     skip=${skip:-$skip_all}
 
-    if [ "$overwrite" == "true" ]
-    then
+    if [ "$overwrite" == "true" ]; then
       rm -rf "$dst"
       success "removed $dst"
     fi
 
-    if [ "$backup" == "true" ]
-    then
+    if [ "$backup" == "true" ]; then
       mv "$dst" "${dst}.backup"
       success "moved $dst to ${dst}.backup"
     fi
 
-    if [ "$skip" == "true" ]
-    then
+    if [ "$skip" == "true" ]; then
       success "skipped $src"
     fi
   fi
 
-  if [ "$skip" != "true" ]  # "false" or empty
-  then
+  if [ "$skip" != "true" ]; then # "false" or empty
     ln -s "$1" "$2"
     success "linked $1 to $2"
   fi
 }
 
-install_dotfiles () {
+install_dotfiles() {
   info 'installing dotfiles'
 
   local overwrite_all=false backup_all=false skip_all=false
 
-  for src in $(find -H "$DOTFILES_ROOT" -maxdepth 2 -name '*.symlink')
-  do
+  for src in $(find -H "$DOTFILES_ROOT" -maxdepth 2 -name '*.symlink'); do
     dst="$HOME/.$(basename "${src%.*}")"
     link_file "$src" "$dst"
   done
 }
 
 install_dotfiles
+
+if is_installed nemo; then
+  nemo_dir="$HOME/.local/share/nemo"
+  mkdir -p "$nemo_dir"
+  link_file "$DOTFILES_ROOT/nemo/actions" "$nemo_dir/actions/"
+fi
 
 echo ''
 echo '  All installed!'
