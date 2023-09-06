@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Show history of checked-out branches
+# https://stackoverflow.com/a/64521752/3019965
+git reflog|awk '/: checkout:/{print $NF}'
