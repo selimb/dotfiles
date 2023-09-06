@@ -1,8 +1,9 @@
 [Nemo Action]
 Active=true
-Name=Copy Path
+Name=Copy P_ath
 Comment=Copy Path to Clipboard
-Exec=<copy-path-to-clipboard.sh %F>
+# Exec=<copy-path-to-clipboard.sh %F>
+Exec=/home/selimb/dotfiles/nemo/actions/copy-path-to-clipboard.sh %F
 Selection=any
 Extensions=any
 Quote=double

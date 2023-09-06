@@ -1,7 +1,8 @@
 # From https://mfcallahan.blog/2022/06/24/make-nemo-the-default-file-manager-on-ubuntu/
 set -eux
 
-sudo apt install nemo
+# Include libnotify-bin so that notify-send works in our custom actions.
+sudo apt install nemo libnotify-bin
 
 xdg-mime default nemo.desktop inode/directory application/x-gnome-saved-search
 
