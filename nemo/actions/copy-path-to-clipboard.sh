@@ -1,6 +1,4 @@
 #!/bin/bash
-echo -n "$*" >>/home/selimb/nemo.log
-
 IFS=$'\n'
 echo -n "$*" | xclip -sel clipboard
 
