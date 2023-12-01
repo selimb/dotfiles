@@ -35,7 +35,9 @@ vpn_up() {
         pid=$(cat $pidfile)
         echo "openconnect process already running at pid=$pid"
     else
-        openconnect_command="sudo openconnect --background "--pid-file=$pidfile" "--user=$username" "$server""
+        # See https://www.reddit.com/r/linuxquestions/comments/131og58/openconnect_stopped_working_unexpected_404_result/
+        user_agent="AnyConnect"
+        openconnect_command="sudo openconnect --background "--useragent=$user_agent" "--pid-file=$pidfile" "--user=$username" "$server""
         if [[ -v ASKPASS ]]; then
             $openconnect_command
         else
