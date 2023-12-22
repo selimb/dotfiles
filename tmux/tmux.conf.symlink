@@ -43,9 +43,12 @@ set -g mouse on
 # Requires xclip
 # https://unix.stackexchange.com/a/349020
 # https://www.freecodecamp.org/news/tmux-in-practice-integration-with-system-clipboard-bcd72c62ff7b/
+# https://www.seanh.cc/2020/12/27/copy-and-paste-in-tmux/
 set-option -s set-clipboard off
 bind-key -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "xclip -i -f -selection primary | xclip -i -selection clipboard"
 bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-no-clear "xclip -selection clipboard -i"
 bind-key -T copy-mode-vi DoubleClick1Pane select-pane \; send -X select-word \; send-keys -X copy-pipe-no-clear "xclip -selection clipboard -i"
 bind-key -n DoubleClick1Pane select-pane \; copy-mode -M \; send -X select-word \; send-keys -X copy-pipe-no-clear "xclip -selection clipboard -i"
+bind -T copy-mode-vi TripleClick1Pane select-pane \; send -X select-line \; send -X copy-pipe-no-clear "xclip -selection clipboard -i"
+bind -n TripleClick1Pane select-pane \; copy-mode -M \; send -X select-line \; send -X copy-pipe-no-clear "xclip -selection clipboard -i"
 
