@@ -1,0 +1,3 @@
+!bin.local
+bin.local/*
+!bin.local/tmux-sesh.template
