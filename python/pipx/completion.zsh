@@ -1,4 +1,4 @@
-autoload -U bashcompinit
-bashcompinit
+if command -v register-python-argcomplete; then
+    eval "$(register-python-argcomplete pipx)"
+fi
 
-eval "$(register-python-argcomplete pipx)"
