@@ -9,7 +9,7 @@ do
   source $file
 done
 
-# load everything but the path, env and completion files
+# load everything but the env and completion files
 for file in ${${config_files:#*/env.$ext}:#*/completion.$ext}
 do
   source $file
