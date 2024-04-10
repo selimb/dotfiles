@@ -1,3 +1,8 @@
+# bun
+node_modules
+bun.lockb
+
+# local stuff
 *.local
 
 #### joe made this: http://goel.io/joe

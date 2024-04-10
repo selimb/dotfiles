@@ -1,0 +1,123 @@
+#!/usr/bin/env bun
+import { $ } from "bun";
+import * as util from "util";
+
+const PAGE_SIZE = 100;
+
+async function getAuthToken(): Promise<string> {
+  const out = await $`gh auth token`;
+  if (out.exitCode !== 0) {
+    const lines = [
+      "Failed to get auth token using 'gh'.",
+      `# exitCode: ${out.exitCode}`,
+      "# stdout:",
+      out.stdout.toString(),
+      "# stderr:",
+      out.stderr.toString(),
+    ];
+    throw new Error(lines.join("\n"));
+  }
+  return out.stdout.toString();
+}
+
+type Comment = { html_url: string; body: string; created_at: string };
+async function* fetchComments({
+  owner,
+  repo,
+  limit,
+}: {
+  owner: string;
+  repo: string;
+  limit: number;
+}) {
+  const authToken = await getAuthToken();
+  let page = 1;
+  let count = 0;
+  const pageSize = 100;
+  const headers = {
+    Accept: "application/vnd.github+json",
+    "X-GitHub-Api-Version": "2022-11-28",
+    Authorization: `Bearer ${authToken}`,
+  };
+  while (true) {
+    const url = new URL(
+      `https://api.github.com/repos/${owner}/${repo}/pulls/comments`
+    );
+    url.searchParams.set("sort", "created");
+    url.searchParams.set("direction", "desc");
+    url.searchParams.set("per_page", pageSize.toString());
+    url.searchParams.append("page", page.toString());
+
+    // https://docs.github.com/en/rest/pulls/comments?apiVersion=2022-11-28#list-review-comments-in-a-repository
+    const resp = await fetch(url, { method: "GET", headers });
+    if (!resp.ok) {
+      const body = await resp.text();
+      const lines = [
+        `Request failed: ${resp.status}`,
+        `headers: ${resp.headers}`,
+        `body: ${body}`,
+      ];
+      throw new Error(lines.join("\n"));
+    }
+
+    const comments = (await resp.json()) as Comment[];
+    for (const comment of comments) {
+      yield comment;
+    }
+
+    if (comments.length < pageSize) {
+      break;
+    }
+
+    count += comments.length;
+    if (count > limit) {
+      break;
+    }
+
+    ++page;
+  }
+}
+
+function parseArgs() {
+  const args = util.parseArgs({
+    options: {
+      owner: {
+        type: "string",
+        short: "o",
+      },
+      repo: {
+        type: "string",
+        short: "r",
+      },
+      query: {
+        type: "string",
+        short: "q",
+      },
+      limit: {
+        type: "string",
+      },
+    },
+  });
+
+  const { owner, repo, query, limit: limitString } = args.values;
+  if (!owner) throw new Error("Missing owner");
+  if (!repo) throw new Error("Missing repo");
+  if (!query) throw new Error("Missing query");
+  const limit = limitString ? parseInt(limitString) : 10_000;
+  return { owner, repo, query, limit };
+}
+
+async function main() {
+  const args = parseArgs();
+
+  const query = args.query.toLowerCase();
+  for await (const comment of fetchComments(args)) {
+    if (comment.body.toLowerCase().includes(query)) {
+      console.info(
+        `MATCH\nurl: ${comment.html_url}\ncreated_at: ${comment.created_at}\nbody: ${comment.body}\n\n`
+      );
+    }
+  }
+}
+
+await main();
