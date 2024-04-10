@@ -5,19 +5,19 @@ import * as util from "util";
 const PAGE_SIZE = 100;
 
 async function getAuthToken(): Promise<string> {
-  const out = await $`gh auth token`;
-  if (out.exitCode !== 0) {
+  const result = await $`gh auth token`.nothrow().quiet();
+  if (result.exitCode !== 0) {
     const lines = [
       "Failed to get auth token using 'gh'.",
-      `# exitCode: ${out.exitCode}`,
+      `# exitCode: ${result.exitCode}`,
       "# stdout:",
-      out.stdout.toString(),
+      result.stdout.toString(),
       "# stderr:",
-      out.stderr.toString(),
+      result.stderr.toString(),
     ];
     throw new Error(lines.join("\n"));
   }
-  return out.stdout.toString();
+  return result.stdout.toString();
 }
 
 type Comment = { html_url: string; body: string; created_at: string };
