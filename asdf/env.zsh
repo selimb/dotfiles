@@ -1,1 +1,1 @@
-source $HOME/.asdf/asdf.sh
+[ -s "$HOME/.asdf/asdf.sh" ] && source "$HOME/.asdf/asdf.sh"
