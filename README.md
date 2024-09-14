@@ -1,4 +1,8 @@
-# Selim’s dotfiles
+# Selim's dotfiles
+
+## Preview
+
+![preview](./assets/screenshot.jpg)
 
 ## First Steps
 
@@ -7,9 +11,6 @@ sudo apt-get install zsh
 chsh -s $(which zsh)  # Restart computer for this to take effect.
 sudo apt-get install git
 ```
-
-[Generate SSH keys](https://help.github.com/articles/generating-ssh-keys/#platform-linux)
-Now you're ready to clone this.
 
 ### 256 color terminal
 
@@ -40,7 +41,8 @@ To install software:
 scripts/install
 ```
 
-You will be prompted to confirm which ones you want to install unless you pass the `-y` flag. This may take a while.
+You will be prompted to confirm which ones you want to install unless you pass the `-y` flag.
+This may take a while.
 
 ## Local Settings and Profiles
 
