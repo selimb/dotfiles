@@ -89,14 +89,32 @@ unset -f git_compare_version
 
 function virtualenv_info ()
 {
-  venv_info=" using %{$fg[yellow]%}"
+  # venv_info=" using %{$fg[yellow]%}"
   if [ $VIRTUAL_ENV ]; then
-    echo "$venv_info"`basename $VIRTUAL_ENV`
-  elif [ $CONDA_DEFAULT_ENV ]; then
-    echo "$venv_info$CONDA_DEFAULT_ENV"
+    echo "venv=$(basename $VIRTUAL_ENV)"
   fi
 }
 export VIRTUAL_ENV_DISABLE_PROMPT=1
+
+function kube_info ()
+{
+  if [ $KUBECONFIG ]; then
+    echo "kube=$(basename $(dirname $KUBECONFIG))"
+  fi
+}
+
+function tools_info ()
+{
+  parts=()
+  parts+="$(virtualenv_info)"
+  parts+="$(kube_info)"
+  # Remove empty elements -- https://unix.stackexchange.com/a/590066
+  parts=($parts)
+  if [[ ! -z $parts ]]; then
+    joined="${(j: :)parts}"
+    echo " %{$fg[yellow]%}($joined)%{$reset_color%}"
+  fi
+}
 
 function git_prompt ()
 {
@@ -127,7 +145,8 @@ PROMPT+=' %{$fg[cyan]%}%n%{$reset_color%}'
 PROMPT+=' at %{$fg[blue]%}$(hostname)%{$reset_color%}'
 PROMPT+=' in %{$fg[green]%}${PWD/#$HOME/~}%b%{$reset_color%}'
 PROMPT+='$(git_prompt)%{$reset_color%}'
-PROMPT+='$(virtualenv_info) %{$reset_color%}'
+# PROMPT+='$(virtualenv_info) %{$reset_color%}'
+PROMPT+='$(tools_info)'
 PROMPT+=' % '$'\n%{$reset_color%}'
 PROMPT+='%{$fg[red]%}%(?,,[%?] )%{$reset_color%}'
 PROMPT+='$ '
