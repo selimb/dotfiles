@@ -19,6 +19,8 @@ done
 if [[ $docompinit = "yes" ]]; then
     autoload -U compinit
     compinit
+    # Also enable bash autocompletions
+    autoload -U +X bashcompinit && bashcompinit
 fi
 
 # load every completion after autocomplete loads
