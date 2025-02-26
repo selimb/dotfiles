@@ -2,6 +2,9 @@
     # View the current working tree status using the short format
     s = status -s
 
+    # Excludes untracked files
+    su = status -s -uno
+
     # Amend the currently staged files to the latest commit
     amend = commit --amend --reuse-message=HEAD
 
