@@ -1,0 +1,34 @@
+#!/usr/bin/env python
+import os
+import shutil
+import sys
+
+
+def main() -> int:
+    # Ensure the script is run with a valid argument
+    if len(sys.argv) != 2:
+        print("Usage: bak <path>")
+        return 1
+
+    src_path = sys.argv[1]
+    if not os.path.exists(src_path):
+        print(f"Error: The path '{src_path}' does not exist.")
+        return 1
+
+    target_path: str
+    counter = 0
+    while True:
+        target_path = src_path + ".bak"
+        if counter > 0:
+            target_path += str(counter)
+        if not os.path.exists(target_path):
+            break
+
+    shutil.copy2(src_path, target_path)
+    print(f"Backup created: {target_path}")
+
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
