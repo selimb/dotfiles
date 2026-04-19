@@ -23,6 +23,7 @@ def main() -> int:
             target_path += str(counter)
         if not os.path.exists(target_path):
             break
+        counter += 1
 
     shutil.copy2(src_path, target_path)
     print(f"Backup created: {target_path}")
