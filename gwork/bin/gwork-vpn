@@ -44,7 +44,7 @@ vpn_up() {
         if [[ -v ASKPASS ]]; then
             $openconnect_command
         else
-            op item get '(Garda) sbelhaouane' --fields label=password 2>&1 |
+            op item get '(Garda) sbelhaouane' --fields label=password --reveal 2>&1 |
                 cat - <(echo 1) |
                 $openconnect_command --passwd-on-stdin
         fi
