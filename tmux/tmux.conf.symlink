@@ -56,10 +56,11 @@ if-shell 'uname | grep -q Darwin' {
 }
 # For some reason I'm unable to properly use the "else" clause with `if-shell`...
 if-shell 'uname | grep -v -q Darwin' {
-    bind-key -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "xclip -i -f -selection primary | xclip -i -selection clipboard"
-    bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-no-clear "xclip -selection clipboard -i"
-    bind-key -T copy-mode-vi DoubleClick1Pane select-pane \; send -X select-word \; send-keys -X copy-pipe-no-clear "xclip -selection clipboard -i"
-    bind-key -n DoubleClick1Pane select-pane \; copy-mode -M \; send -X select-word \; send-keys -X copy-pipe-no-clear "xclip -selection clipboard -i"
-    bind -T copy-mode-vi TripleClick1Pane select-pane \; send -X select-line \; send -X copy-pipe-no-clear "xclip -selection clipboard -i"
-    bind -n TripleClick1Pane select-pane \; copy-mode -M \; send -X select-line \; send -X copy-pipe-no-clear "xclip -selection clipboard -i"
+      set -g set-clipboard on
+#     bind-key -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "xclip -i -f -selection primary | xclip -i -selection clipboard"
+#     bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-no-clear "xclip -selection clipboard -i"
+#     bind-key -T copy-mode-vi DoubleClick1Pane select-pane \; send -X select-word \; send-keys -X copy-pipe-no-clear "xclip -selection clipboard -i"
+#     bind-key -n DoubleClick1Pane select-pane \; copy-mode -M \; send -X select-word \; send-keys -X copy-pipe-no-clear "xclip -selection clipboard -i"
+#     bind -T copy-mode-vi TripleClick1Pane select-pane \; send -X select-line \; send -X copy-pipe-no-clear "xclip -selection clipboard -i"
+#     bind -n TripleClick1Pane select-pane \; copy-mode -M \; send -X select-line \; send -X copy-pipe-no-clear "xclip -selection clipboard -i"
 }
