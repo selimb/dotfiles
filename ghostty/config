@@ -1,0 +1,3 @@
+# Bind Cmd+. to '\x1b + .' (Escape + .), such that `terminal/keybindings.zsh` can bind it to `insert-last-word`.
+# By default, Ghostty binds Cmd+. to Escape.
+keybind = cmd+.=text:\x1b.

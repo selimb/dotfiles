@@ -124,5 +124,12 @@ if is_installed nemo; then
   link_file "$DOTFILES_ROOT/nemo/actions" "$nemo_dir/actions"
 fi
 
+# Ghostty
+if [ "$(uname)" == "Darwin" ]; then
+  ghostty_dir="$HOME/.config/ghostty"
+  mkdir -p "$ghostty_dir"
+  link_file "$DOTFILES_ROOT/ghostty/config" "$ghostty_dir/config"
+fi
+
 echo ''
 echo '  All installed!'
